@@ -21,7 +21,6 @@ function gameLoop(totalRunningTime) {
 
 function setupGame() {
     global.playerObject = new Character(640, 340, 60, 60);
-    console.log(global.playerObject);
     //new BlockObject(300, 400, 50, 50);
     // setup your game here - means: Create instances of the GameObjects that belong to your game.
     // e.g.: 

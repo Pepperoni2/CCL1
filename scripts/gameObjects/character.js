@@ -1,46 +1,48 @@
 import { global } from "../modules/global.js";
+import { BaseGameObject } from "./baseGameObject.js";
 
-class Character {
-    x;
-    y;
+class Character extends BaseGameObject {
+    // basic element properties
+    name = "Jake";
     xVelocity = 0;
     yVelocity = 0;
-    width;
-    height;
-    speed;
-    prevX;
-    prevY;
-    name = "Jake";
-    active = true;
+    
+    // Game specific properties
+    health = 100;
+    speed = 200;
+    damage = 10;
+    level = 1;
+    experience = 0;
+    movementSpeed = 1.0;
+    attackSpeed = 1.0;
+    healthRegeneration = 0.1; // Health Regeneration per second
+    weapons = {}; //equipped weapons
 
     constructor (x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        global.allGameObjects.push(this);
+        super(x, y, width, height);
     }
 
-    update(){
+    update = function(){
+        this.xVelocity = 0;
+        this.yVelocity = 0;
+        //Octagonal movement
+        // Check for W, A, S, D key presses and set velocity accordingly
+        if (global.keysPressed['w']) this.yVelocity = -this.speed * this.movementSpeed; // Moving up
+        if (global.keysPressed['s']) this.yVelocity = this.speed * this.movementSpeed; // Moving down
+        if (global.keysPressed['a']) this.xVelocity = -this.speed * this.movementSpeed; // Moving left
+        if (global.keysPressed['d']) this.xVelocity = this.speed * this.movementSpeed; // Moving right
+
         this.x += this.xVelocity * global.deltaTime;
         this.y += this.yVelocity * global.deltaTime;
         this.screenStop();
     }
 
-    draw(){
-        global.ctx.fillStyle = "red";
+    draw = function(){
+        global.ctx.fillStyle = "blue";
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
-    getBoxBounds = function () {
-        let box = {
-            "left": this.x,
-            "right": this.x + this.width,
-            "top": this.y,
-            "bottom": this.y + this.height,
-        };
-        return box;
-    };
+    
 
     // character stops at the edge of the canvas
     screenStop = function(){
@@ -64,10 +66,6 @@ class Character {
         
     }
 
-    storePositionOfPreviousFrame(){
-        this.prevX = this.x;
-        this.prevY = this.y;
-    }
 }
 
 export { Character }

@@ -8,6 +8,7 @@ global.allGameObjects = [];
 global.playerObject = {};
 global.score = 0;
 global.gameTime = 0;
+global.keysPressed = {};
 
 global.getCanvasBounds = function () {
     let bounds =  {

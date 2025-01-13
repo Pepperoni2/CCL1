@@ -1,6 +1,5 @@
 import { global } from "./global.js";
 import { Character } from "../gameObjects/character.js";
-import { move } from "./input.js";
 
 function gameLoop(totalRunningTime) { 
     global.deltaTime = totalRunningTime - global.prevTotalRunningTime; // Time in milliseconds between frames
@@ -15,7 +14,6 @@ function gameLoop(totalRunningTime) {
             global.allGameObjects[i].draw();
         }
     }
-    move();
     requestAnimationFrame(gameLoop); // This keeps the gameLoop running indefinitely
 }
 

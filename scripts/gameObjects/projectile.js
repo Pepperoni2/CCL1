@@ -7,6 +7,7 @@ class Projectile extends BaseGameObject {
     xVelocity = 0;
     yVelocity = 0;
     movementSpeed = 1.5;
+    damage = 5;
 
 
     constructor (x,y, width, height, speed, direction){ // 15x15

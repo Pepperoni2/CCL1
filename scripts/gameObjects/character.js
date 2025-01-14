@@ -65,7 +65,16 @@ class Character extends BaseGameObject {
     }
 
     
-
+    reactToCollision = function(collidingObject){
+        switch(collidingObject.name){
+            case "enemy":
+                this.health -= collidingObject.damage;
+                break;
+            default:
+                // do nothing
+                break;
+        }
+    }
     // character stops at the edge of the canvas
     screenStop = function(){
         let canvasBox = global.getCanvasBounds();

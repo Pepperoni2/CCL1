@@ -27,11 +27,9 @@ class Projectile extends BaseGameObject {
     }
 
     reactToCollision = function(){
-
         let canvasBox = global.getCanvasBounds();
         let projectileBox = this.getBoxBounds();
         if (projectileBox.left <= canvasBox.left || projectileBox.right >= canvasBox.right || projectileBox.top <= canvasBox.top || projectileBox.bottom >= canvasBox.bottom) {
-            console.log('projectile collided');
             this.active = false;
         }
     }

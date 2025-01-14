@@ -1,6 +1,5 @@
 import { global } from "./global.js";
 import { Character } from "../gameObjects/character.js";
-import { Projectile } from "../gameObjects/projectile.js";
 
 function gameLoop(totalRunningTime) { 
     global.deltaTime = totalRunningTime - global.prevTotalRunningTime; // Time in milliseconds between frames
@@ -12,6 +11,7 @@ function gameLoop(totalRunningTime) {
 
     global.allGameObjects.forEach(obj => obj.update()); // Update all game objects
     global.allGameObjects.forEach(obj => obj.draw()); // Draw all game objects
+    global.allGameObjects.forEach(obj => global.checkCollisionWithAnyOther(obj)); // Check for collisions between all game objects
     requestAnimationFrame(gameLoop); // This keeps the gameLoop running indefinitely
 }
 

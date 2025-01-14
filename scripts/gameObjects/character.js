@@ -1,5 +1,6 @@
 import { global } from "../modules/global.js";
 import { BaseGameObject } from "./baseGameObject.js";
+import { Projectile } from "./projectile.js";
 
 class Character extends BaseGameObject {
     // basic element properties
@@ -7,9 +8,10 @@ class Character extends BaseGameObject {
     xVelocity = 0;
     yVelocity = 0;
     
+    
     // Game specific properties
     health = 100;
-    speed = 200;
+    speed = 100;
     damage = 10;
     level = 1;
     experience = 0;
@@ -17,6 +19,7 @@ class Character extends BaseGameObject {
     attackSpeed = 1.0;
     healthRegeneration = 0.1; // Health Regeneration per second
     weapons = {}; //equipped weapons
+    lastShotTime = 0;
 
     constructor (x, y, width, height) {
         super(x, y, width, height);
@@ -35,6 +38,22 @@ class Character extends BaseGameObject {
         this.x += this.xVelocity * global.deltaTime;
         this.y += this.yVelocity * global.deltaTime;
         this.screenStop();
+
+        this.attack();
+    }
+
+    attack = function(){
+        const currentTime = global.getTime();
+        const attackRate = 1 / this.attackSpeed;
+        if (currentTime - this.lastShotTime > attackRate) {
+            let direction = Math.atan2(this.yVelocity, this.xVelocity);
+            if(this.yVelocity === 0 && this.xVelocity === 0){
+                direction = Math.random() * 2 * Math.PI;
+            }
+
+            new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 300, direction);
+            this.lastShotTime = currentTime;
+        }
     }
 
     draw = function(){

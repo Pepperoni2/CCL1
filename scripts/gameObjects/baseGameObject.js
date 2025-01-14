@@ -38,16 +38,6 @@ class BaseGameObject {
         return box;
     };
 
-    getBoxBounds = function () {
-        let box = {
-            "left": this.x,
-            "right": this.x + this.width,
-            "top": this.y,
-            "bottom": this.y + this.height,
-        };
-        return box;
-    };
-
     update = function () {
         // empty function to be overwritten by child classes
     }

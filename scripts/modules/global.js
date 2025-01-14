@@ -51,4 +51,10 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
 }
 
 
+global.startTime = Date.now();
+global.getTime = function(){
+    return (Date.now() - global.startTime) / 1000; // Elapsed time in seconds
+}
+
+
 export { global }

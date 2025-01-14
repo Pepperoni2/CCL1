@@ -11,11 +11,11 @@ class Character extends BaseGameObject {
     
     // Game specific properties
     health = 100;
-    speed = 100;
+    movementSpeed = 100;
     damage = 10;
     level = 1;
     experience = 0;
-    movementSpeed = 1.0;
+    movementFactor = 1.5;
     attackSpeed = 1.0;
     healthRegeneration = 0.1; // Health Regeneration per second
     weapons = []; //equipped weapons
@@ -31,10 +31,19 @@ class Character extends BaseGameObject {
         this.yVelocity = 0;
         //Octagonal movement
         // Check for W, A, S, D key presses and set velocity accordingly
-        if (global.keysPressed['w']) this.yVelocity = -this.speed * this.movementSpeed; // Moving up
-        if (global.keysPressed['s']) this.yVelocity = this.speed * this.movementSpeed; // Moving down
-        if (global.keysPressed['a']) this.xVelocity = -this.speed * this.movementSpeed; // Moving left
-        if (global.keysPressed['d']) this.xVelocity = this.speed * this.movementSpeed; // Moving right
+        if (global.keysPressed['w']) this.yVelocity = -this.movementSpeed * this.movementFactor; // Moving up
+        if (global.keysPressed['s']) this.yVelocity = this.movementSpeed * this.movementFactor; // Moving down
+        if (global.keysPressed['a']) this.xVelocity = -this.movementSpeed * this.movementFactor; // Moving left
+        if (global.keysPressed['d']) this.xVelocity = this.movementSpeed * this.movementFactor; // Moving right
+
+        // calculate the magnitude of the velocity vector
+        const magnitude = Math.sqrt(this.xVelocity ** 2 + this.yVelocity ** 2);
+
+        // normalize the velocity vector and multiply it by the speed
+        if (magnitude > 0){
+            this.xVelocity = (this.xVelocity / magnitude) * this.movementSpeed * this.movementFactor;
+            this.yVelocity = (this.yVelocity / magnitude) * this.movementSpeed * this.movementFactor;
+        }
 
         this.x += this.xVelocity * global.deltaTime;
         this.y += this.yVelocity * global.deltaTime;

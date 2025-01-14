@@ -18,11 +18,12 @@ class Character extends BaseGameObject {
     movementSpeed = 1.0;
     attackSpeed = 1.0;
     healthRegeneration = 0.1; // Health Regeneration per second
-    weapons = {}; //equipped weapons
+    weapons = []; //equipped weapons
     lastShotTime = 0;
 
     constructor (x, y, width, height) {
         super(x, y, width, height);
+        this.weapons.push("pistol"); // every character will have a default weapon equipped
     }
 
     update = function(){
@@ -50,8 +51,10 @@ class Character extends BaseGameObject {
             if(this.yVelocity === 0 && this.xVelocity === 0){
                 direction = Math.random() * 2 * Math.PI;
             }
-
-            new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 300, direction);
+            if(this.weapons.includes("pistol")){
+                new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 300, direction);
+            }
+            else console.log("No weapon equipped");
             this.lastShotTime = currentTime;
         }
     }

@@ -18,7 +18,7 @@ class Projectile extends BaseGameObject {
     update = function(){
         this.x = Math.cos(this.direction) * this.speed * global.deltaTime + this.x;
         this.y = Math.sin(this.direction) * this.speed * global.deltaTime + this.y;
-        this.reactToCollision();
+        this.checkCanvasEdge();
     }
 
     draw = function(){
@@ -26,7 +26,8 @@ class Projectile extends BaseGameObject {
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
-    reactToCollision = function(){
+    // sets state of projectile to false when canvas edge has been reached
+    checkCanvasEdge = function(){
         let canvasBox = global.getCanvasBounds();
         let projectileBox = this.getBoxBounds();
         if (projectileBox.left <= canvasBox.left || projectileBox.right >= canvasBox.right || projectileBox.top <= canvasBox.top || projectileBox.bottom >= canvasBox.bottom) {

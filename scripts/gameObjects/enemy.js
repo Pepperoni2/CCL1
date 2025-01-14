@@ -1,5 +1,6 @@
 import { global } from "../modules/global.js";
 import { BaseGameObject } from "./baseGameObject.js";
+import { ExpObject } from "./collectables/expObject.js";
 
 class Enemy extends BaseGameObject {
     constructor(x, y, width, height) {
@@ -42,6 +43,8 @@ class Enemy extends BaseGameObject {
                 this.health -= collidedObject.damage;
                 if(this.health <= 0){
                     this.active = false;
+                    Math.random() > 0.5 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 50, 50) : null;
+                    // new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 20, 20)
                     // global.score += 10;
                 }
                 break;

@@ -18,7 +18,7 @@ function gameLoop(totalRunningTime) {
 
 function setupGame() {
     global.playerObject = new Character(640, 340, 60, 60);
-    const spawnRate = 2000; // 4 seconds
+    const spawnRate = 2000; // 2 seconds
     const enemyInterval = setInterval(() => {
         // Stop spawning enemies if player is dead
         if(!global.playerObject.active){ clearInterval(enemyInterval); }

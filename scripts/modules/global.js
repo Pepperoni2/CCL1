@@ -1,3 +1,5 @@
+import { Enemy } from "../gameObjects/enemy.js";
+
 const global = {};
 
 global.canvas = document.querySelector("#gameCanvas");
@@ -22,14 +24,14 @@ global.getCanvasBounds = function () {
 }
 
 global.checkCollisionWithAnyOther = function (givenObject) {
-    for (let i = givenObject.index; i < global.allGameObjects.length; i++) {
-        let otherObject = global.allGameObjects[i];
-        if (otherObject.active == true) {
-            let collisionHappened = this.detectBoxCollision(givenObject, otherObject);
-            if (collisionHappened) {
-                givenObject.reactToCollision(otherObject);
-                otherObject.reactToCollision(givenObject);
-            }
+    for (let i = 0; i < global.allGameObjects.length; i++) {
+        let collided = this.detectBoxCollision(givenObject, global.allGameObjects[i]);
+        if (collided) {
+            global.playerObject.reactToCollision(this.allGameObjects[i]);
+            // log which objects collided
+            // console.log(global.allGameObjects[i].name + " collided with " + givenObject.name);
+            // global.allGameObjects[i].reactToCollision(global.playerObject);
+            if(givenObject.active) global.allGameObjects[i].reactToCollision(givenObject);
         }
     }
 }
@@ -48,6 +50,38 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
         }
     }
     return false;
+}
+
+
+global.startTime = Date.now();
+global.getTime = function(){
+    return (Date.now() - global.startTime) / 1000; // Elapsed time in seconds
+}
+
+global.spawnEnemy = function(){
+    let edge = Math.floor(Math.random() * 4);
+    let randomX, randomY;
+    switch(edge){
+        case 0: //left edge
+            randomX = -60;
+            randomY = Math.random() * global.canvas.height;
+            break;
+        case 1: //top
+            randomX = Math.random() * global.canvas.width;
+            randomY = -60;
+            break;
+        case 2: //right edge
+            randomX = global.canvas.width + 60;
+            randomY = Math.random() * global.canvas.height;
+            break;
+        case 3: //bottom edge
+            randomX = Math.random() * global.canvas.width;
+            randomY = global.canvas.height + 60;
+            break;
+
+    }
+
+    new Enemy(randomX, randomY, 60, 60);
 }
 
 

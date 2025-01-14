@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misty Survivor's</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./images/logo.jpg"> 
+</head>
+<body>
+    <!-- further HTML elements, that should maybe be displayed above your game. E.g. Healtbar, .... -->
+    <!-- <div id="healthDisplay">Health:</div> -->
+    <div id="gameContainer">
+      <!-- further HTML elements, that should be behind your game. e.g. Background image, .... -->
+      <div id="background"></div>
+      <canvas id="gameCanvas" width="1280" height="720"></canvas> <!-- change the size attributes of your canvas according to your game -->
+      <!-- further HTML elements, that should overlay your game. e.g. Main Screen, Game Over screen, .... -->
+      <!-- <div id="gameOverScreen"></div> -->
+      <!-- <div id="mainScreen"></div> -->
+    </div>
+    <!-- further HTML elements, that should maybe be displayed below your game. E.g. Score, .... -->
+    <!-- <div id="scoreDisplay">Score: </div> -->   
+  
+    <script type="module" src="./scripts/modules/global.js"></script>
+    <script type="module" src="./scripts/modules/input.js"></script>
+    <script type="module" src="./scripts/modules/main.js"></script>
+    
+  </body>
+  </html>
+</html>

@@ -26,6 +26,17 @@ class Projectile extends BaseGameObject {
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
+    reactToCollision = function(){
+        // switch (collidedObject.name) {
+        //     case "Enemy":
+        //         // this.active = false;
+        //         break;
+        //     default:
+        //         // do nothing
+        //         break;
+        // }
+    }
+
     // sets state of projectile to false when canvas edge has been reached
     checkCanvasEdge = function(){
         let canvasBox = global.getCanvasBounds();

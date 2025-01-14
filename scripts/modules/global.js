@@ -24,11 +24,12 @@ global.getCanvasBounds = function () {
 global.checkCollisionWithAnyOther = function (givenObject) {
     for (let i = 0; i < global.allGameObjects.length; i++) {
         let collided = this.detectBoxCollision(givenObject, global.allGameObjects[i]);
-        if (collided && (global.allGameObjects[i] != givenObject)) {
+        if (collided) {
             global.playerObject.reactToCollision(this.allGameObjects[i]);
             // log which objects collided
             // console.log(global.allGameObjects[i].name + " collided with " + givenObject.name);
-            global.allGameObjects[i].reactToCollision(global.playerObject);
+            // global.allGameObjects[i].reactToCollision(global.playerObject);
+            if(givenObject.active) global.allGameObjects[i].reactToCollision(givenObject);
         }
     }
 }

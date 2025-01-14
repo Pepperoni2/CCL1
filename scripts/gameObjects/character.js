@@ -4,7 +4,7 @@ import { Projectile } from "./projectile.js";
 
 class Character extends BaseGameObject {
     // basic element properties
-    name = "Jake";
+    name = "Player";
     xVelocity = 0;
     yVelocity = 0;
     

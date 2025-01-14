@@ -16,7 +16,7 @@ class Character extends BaseGameObject {
     level = 1;
     experience = 0;
     movementFactor = 1.5;
-    attackSpeed = 1.0;
+    attackSpeed = 1.5;
     healthRegeneration = 0.1; // Health Regeneration per second
     weapons = []; //equipped weapons
     lastShotTime = 0;

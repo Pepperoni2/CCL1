@@ -6,7 +6,7 @@ class Enemy extends BaseGameObject {
         super(x, y, width, height);
         this.name = "Enemy";
         this.health = 10;
-        this.damage = 10;
+        this.damage = 100;
         this.speed = 30;
         global.allGameObjects.push(this)
     }

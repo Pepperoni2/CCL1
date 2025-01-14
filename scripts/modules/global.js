@@ -1,3 +1,5 @@
+import { Enemy } from "../gameObjects/enemy.js";
+
 const global = {};
 
 global.canvas = document.querySelector("#gameCanvas");
@@ -54,6 +56,32 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
 global.startTime = Date.now();
 global.getTime = function(){
     return (Date.now() - global.startTime) / 1000; // Elapsed time in seconds
+}
+
+global.spawnEnemy = function(){
+    let edge = Math.floor(Math.random() * 4);
+    let randomX, randomY;
+    switch(edge){
+        case 0: //left edge
+            randomX = -60;
+            randomY = Math.random() * global.canvas.height;
+            break;
+        case 1: //top
+            randomX = Math.random() * global.canvas.width;
+            randomY = -60;
+            break;
+        case 2: //right edge
+            randomX = global.canvas.width + 60;
+            randomY = Math.random() * global.canvas.height;
+            break;
+        case 3: //bottom edge
+            randomX = Math.random() * global.canvas.width;
+            randomY = global.canvas.height + 60;
+            break;
+
+    }
+
+    new Enemy(randomX, randomY, 60, 60);
 }
 
 

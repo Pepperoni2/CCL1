@@ -28,14 +28,6 @@ class Projectile extends BaseGameObject {
     }
 
     reactToCollision = function(){
-        // switch (collidedObject.name) {
-        //     case "Enemy":
-        //         // this.active = false;
-        //         break;
-        //     default:
-        //         // do nothing
-        //         break;
-        // }
     }
 
     // sets state of projectile to false when canvas edge has been reached

@@ -30,7 +30,7 @@ class Character extends BaseGameObject {
 
     update = function(){
         if(this.health <= 0) {
-            global.gameOver();
+            global.ShowGameOverScreen();
         }
         this.xVelocity = 0;
         this.yVelocity = 0;

@@ -67,9 +67,11 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
     return false;
 }
 
-global.gameOver = function(){
+global.ShowGameOverScreen = function(){
     console.log("Game Over");
     global.playerObject.active = false;
+    document.querySelector("#gameOverScreen").style.display = "flex";
+    document.querySelector("#finalScore").innerHTML = global.score;
 }
 
 global.startTime = Date.now();

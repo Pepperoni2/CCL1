@@ -25,6 +25,11 @@ function gameLoop(totalRunningTime) {
 }
 
 function setupGame() {
+    document.querySelector("#gameOverScreen").style.display = "none";
+    global.allGameObjects = [];
+    global.score = 0;
+    global.gameOver = false;
+    global.startTime = Date.now();
     global.playerObject = new Character(640, 340, 60, 60);
     const spawnRate = 2000; // 2 seconds
     const enemyInterval = setInterval(() => {
@@ -35,6 +40,7 @@ function setupGame() {
         else global.spawnEnemy(); 
 
     }, spawnRate);
+    animationFrameId = requestAnimationFrame(gameLoop);
 }
 setupGame();
 animationFrameId = requestAnimationFrame(gameLoop);
@@ -45,6 +51,12 @@ document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
       global.deltaTime = performance.now();
     } 
+});
+
+document.addEventListener("keydown", (event) => {
+    if(!global.playerObject.active && event.key === "Enter"){
+        setupGame();
+    }
 });
 
 

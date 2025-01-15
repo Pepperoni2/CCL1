@@ -9,3 +9,8 @@ EnemySpawner implemented
 EXP points added, when enemy is killed
 
 Tomorrow: leveling system, basic UI, passive stat upgrades
+
+15.01.2025
+see history
+
+Tomorrow: startScreen, upgrade cards, gameloop optimiziation

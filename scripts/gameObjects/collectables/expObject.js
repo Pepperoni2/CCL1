@@ -2,12 +2,10 @@ import { global } from "../../modules/global.js";
 import { BaseGameObject } from "../baseGameObject.js";
 
 class ExpObject extends BaseGameObject{
-    width = 5;
-    height = 5;
     constructor(x, y, width, height){
         super(x, y, width, height);
         this.name = "ExpObject";
-        this.exp = 10;
+        this.exp = 2;
         global.allGameObjects.push(this);   
     }
 
@@ -20,11 +18,11 @@ class ExpObject extends BaseGameObject{
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
-    reactToCollision = function(collidedObject){
-        if(collidedObject.name === "Player"){
-            collidedObject.experience += this.exp;
-            this.active = false;
-        }
+    reactToCollision = function(){
+        // if(collidedObject.name === "Player"){
+        //     collidedObject.experience += this.exp;
+        //     this.active = false;
+        // }
     }
 }
 

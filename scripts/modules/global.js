@@ -10,6 +10,7 @@ global.allGameObjects = [];
 global.playerObject = {};
 global.score = 0;
 global.gameTime = 0;
+global.gameOver = false;
 global.keysPressed = {};
 
 global.getCanvasBounds = function () {
@@ -25,14 +26,27 @@ global.getCanvasBounds = function () {
 
 global.checkCollisionWithAnyOther = function (givenObject) {
     for (let i = 0; i < global.allGameObjects.length; i++) {
-        let collided = this.detectBoxCollision(givenObject, global.allGameObjects[i]);
+        let collided = false;
+        if(global.allGameObjects[i].name != "ExpObject" && givenObject.name != "Enemy"){
+            collided = this.detectBoxCollision(givenObject, global.allGameObjects[i]);
+        }
         if (collided) {
             global.playerObject.reactToCollision(this.allGameObjects[i]);
             // log which objects collided
             // console.log(global.allGameObjects[i].name + " collided with " + givenObject.name);
             // global.allGameObjects[i].reactToCollision(global.playerObject);
-            if(givenObject.active) global.allGameObjects[i].reactToCollision(givenObject);
+            // if (givenObject.name === "ExpObject" && global.allGameObjects[i].name === "Enemy") {
+            //     global.playerObject.reactToCollision(this.allGameObjects[i]);
+            // }
+            // else {
+
+            //     if (givenObject.active) {
+            //         global.allGameObjects[i].reactToCollision(givenObject);
+            //     }
+            // }
+            if (givenObject.active) global.allGameObjects[i].reactToCollision(givenObject);
         }
+
     }
 }
 

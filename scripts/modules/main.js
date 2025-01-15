@@ -1,6 +1,5 @@
 import { global } from "./global.js";
 import { Character } from "../gameObjects/character.js";
-import { Enemy } from "../gameObjects/enemy.js";
 
 function gameLoop(totalRunningTime) { 
     global.deltaTime = totalRunningTime - global.prevTotalRunningTime; // Time in milliseconds between frames

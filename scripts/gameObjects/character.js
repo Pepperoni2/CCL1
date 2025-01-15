@@ -12,7 +12,7 @@ class Character extends BaseGameObject {
     // Game specific properties
     health = 100;
     movementSpeed = 100;
-    damage = 10;
+    damage = 10; 
     level = 1;
     experience = 0;
     movementFactor = 1.5;
@@ -20,6 +20,8 @@ class Character extends BaseGameObject {
     healthRegeneration = 0.1; // Health Regeneration per second
     weapons = []; //equipped weapons
     lastShotTime = 0;
+    experienceForNextLevel;
+    dmgModifier = 1.0;
 
     constructor (x, y, width, height) {
         super(x, y, width, height);
@@ -48,8 +50,18 @@ class Character extends BaseGameObject {
         this.x += this.xVelocity * global.deltaTime;
         this.y += this.yVelocity * global.deltaTime;
         this.screenStop();
-
         this.attack();
+        while (this.experience >= this.experienceForNextLevel){
+            this.levelUp();
+        }
+    }
+    levelUp = function(){
+        this.level += 1;
+        this.experience -= this.calculatedExperienceThreshold();
+        this.experience < 0 ? this.experience = 0 : null;
+        this.movementSpeed += 10;
+        this.dmgModifier += 0.05;
+        console.log(`Level up! You are now level ${this.level}`);
     }
 
     attack = function(){
@@ -61,7 +73,7 @@ class Character extends BaseGameObject {
                 direction = Math.random() * 2 * Math.PI;
             }
             if(this.weapons.includes("pistol")){
-                new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 300, direction);
+                new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 300, direction, this.dmgModifier);
             }
             else console.log("No weapon equipped");
             this.lastShotTime = currentTime;
@@ -71,13 +83,27 @@ class Character extends BaseGameObject {
     draw = function(){
         global.ctx.fillStyle = "blue";
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
 
+        // Display level and experience
+        global.ctx.fillStyle = "black";
+        global.ctx.font = "16px Arial";
+        global.ctx.fillText(`Level: ${this.level}`, this.x, this.y - 20);
+    }
+    calculatedExperienceThreshold = function(){
+        return Math.floor(10 * Math.pow(1.5, this.level - 1));
+    };
     
     reactToCollision = function(collidingObject){
         switch(collidingObject.name){
             case "enemy":
                 this.health -= collidingObject.damage;
+                break;
+            case "ExpObject":
+                collidingObject.active = false;
+                console.log("Experience gained: " + collidingObject.exp);
+                this.experience += collidingObject.exp;
+                console.log("current Exp"+ this.experience)
+                this.experienceForNextLevel = this.calculatedExperienceThreshold();
                 break;
             default:
                 // do nothing

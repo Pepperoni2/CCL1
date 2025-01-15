@@ -5,7 +5,7 @@ body{
 }
 #gameContainer{
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,3 +18,46 @@ body{
     display: block;
     
 }
+
+/* Experience Bar */
+#experienceBar{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background-color: rgb(62, 52, 168);
+    border: 2px solid rgb(166, 164, 50);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+#experienceBarFill{
+    background-color: rgb(35, 31, 84);
+    height: 100%;
+    max-width: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+#level{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 30px;
+    /* margin-right: 50px; */
+    text-align: right;
+    pointer-events: none;
+}
+
+#time{
+    position:relative;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    color:white;
+    font-size: 32px;
+}
+
+

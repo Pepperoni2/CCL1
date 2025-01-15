@@ -32,6 +32,8 @@ global.checkCollisionWithAnyOther = function (givenObject) {
         }
         if (collided) {
             global.playerObject.reactToCollision(this.allGameObjects[i]);
+            if (givenObject.active) global.allGameObjects[i].reactToCollision(givenObject);
+
             // log which objects collided
             // console.log(global.allGameObjects[i].name + " collided with " + givenObject.name);
             // global.allGameObjects[i].reactToCollision(global.playerObject);
@@ -44,7 +46,6 @@ global.checkCollisionWithAnyOther = function (givenObject) {
             //         global.allGameObjects[i].reactToCollision(givenObject);
             //     }
             // }
-            if (givenObject.active) global.allGameObjects[i].reactToCollision(givenObject);
         }
 
     }
@@ -66,6 +67,10 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
     return false;
 }
 
+global.gameOver = function(){
+    console.log("Game Over");
+    global.playerObject.active = false;
+}
 
 global.startTime = Date.now();
 global.getTime = function(){
@@ -98,5 +103,26 @@ global.spawnEnemy = function(){
     new Enemy(randomX, randomY, 60, 60);
 }
 
+global.updateUI = function(){
+    global.updateExperienceBar();
+    global.updateTime();
+    
+}
+global.updateTime = function(){
+    document.querySelector("#time").innerHTML = global.formatTime(global.getTime());
+}
+
+global.updateExperienceBar = function(){
+    const experienceBar = document.querySelector("#experienceBarFill");
+    experienceBar.style.width = `${(global.playerObject.experience / global.playerObject.experienceForNextLevel) * 100}%`;
+    const levelNumber = document.querySelector("#levelNumber");
+    levelNumber.innerHTML = global.playerObject.level;
+}
+global.formatTime = function(seconds){
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = Math.floor(seconds % 60);
+    
+    return `${minutes}:${remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds}`;
+}
 
 export { global }

@@ -5,7 +5,7 @@ class ExpObject extends BaseGameObject{
     constructor(x, y, width, height){
         super(x, y, width, height);
         this.name = "ExpObject";
-        this.exp = 2;
+        this.exp = 10;
         global.allGameObjects.push(this);   
     }
 

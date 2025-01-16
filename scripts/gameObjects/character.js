@@ -1,6 +1,7 @@
 import { global } from "../modules/global.js";
 import { BaseGameObject } from "./baseGameObject.js";
 import { Projectile } from "./projectile.js";
+import { displayUpgradeCards } from "../modules/upgradeManager.js";
 
 class Character extends BaseGameObject {
     // basic element properties
@@ -68,6 +69,7 @@ class Character extends BaseGameObject {
         this.movementSpeed += 10;
         this.dmgModifier += 0.05;
         console.log(`Level up! You are now level ${this.level}`);
+        displayUpgradeCards();
     }
 
     attack = function(){

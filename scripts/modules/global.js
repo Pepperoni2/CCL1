@@ -12,6 +12,7 @@ global.score = 0;
 global.gameTime = 0;
 global.gameOver = false;
 global.keysPressed = {};
+global.IsupgradeSceneActive = false;
 
 global.getCanvasBounds = function () {
     let bounds =  {
@@ -70,6 +71,9 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
 global.ShowGameOverScreen = function(){
     console.log("Game Over");
     global.playerObject.active = false;
+    // hide upgrade screen if it is open
+    document.querySelector("#upgradeScreen").style.display = "none";
+    // display gameOver Screen
     document.querySelector("#gameOverScreen").style.display = "flex";
     document.querySelector("#finalScore").innerHTML = global.score;
 }

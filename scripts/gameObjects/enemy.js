@@ -42,18 +42,13 @@ class Enemy extends BaseGameObject {
                 collidedObject.active = false;
                 this.health -= collidedObject.damage;
                 if(this.health <= 0){
+                    global.score += 1;
                     this.active = false;
                     Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15) : null;  
                 }
                 break;
             case "Player":
                 collidedObject.health -= this.damage * global.deltaTime;
-                if(collidedObject.health <= 0){
-                    // Game over
-                    collidedObject.active = false;
-                    console.log("Game Over");
-                    global.gameOver = true;
-                }
                 break;
             default:
                 // do nothing

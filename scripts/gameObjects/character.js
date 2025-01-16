@@ -29,6 +29,9 @@ class Character extends BaseGameObject {
     }
 
     update = function(){
+        if(this.health <= 0) {
+            global.ShowGameOverScreen();
+        }
         this.xVelocity = 0;
         this.yVelocity = 0;
         //Octagonal movement
@@ -55,6 +58,8 @@ class Character extends BaseGameObject {
             this.levelUp();
         }
     }
+
+
     levelUp = function(){
         this.level += 1;
         this.experience -= this.calculatedExperienceThreshold();
@@ -85,9 +90,13 @@ class Character extends BaseGameObject {
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
 
         // Display level and experience
-        global.ctx.fillStyle = "black";
-        global.ctx.font = "16px Arial";
-        global.ctx.fillText(`Level: ${this.level}`, this.x, this.y - 20);
+        // global.ctx.fillStyle = "black";
+        // global.ctx.font = "16px Arial";
+        // global.ctx.fillText(`Level: ${this.level}`, this.x, this.y - 20);
+        // Health bar
+        global.ctx.fillStyle = "darkred";
+        global.ctx.fillRect(this.x, this.y + this.height + 10, this.width * (this.health / 100), 5);
+
     }
     calculatedExperienceThreshold = function(){
         return Math.floor(10 * Math.pow(1.5, this.level - 1));
@@ -100,9 +109,7 @@ class Character extends BaseGameObject {
                 break;
             case "ExpObject":
                 collidingObject.active = false;
-                console.log("Experience gained: " + collidingObject.exp);
                 this.experience += collidingObject.exp;
-                console.log("current Exp"+ this.experience)
                 this.experienceForNextLevel = this.calculatedExperienceThreshold();
                 break;
             default:

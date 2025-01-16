@@ -28,7 +28,7 @@ body{
     border: 2px solid rgb(166, 164, 50);
     border-radius: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     overflow: hidden;
 }

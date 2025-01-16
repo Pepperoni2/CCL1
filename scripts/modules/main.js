@@ -26,6 +26,7 @@ function gameLoop(totalRunningTime) {
 
 function setupGame() {
     document.querySelector("#gameOverScreen").style.display = "none";
+    document.querySelector("#experienceBarFill").style.width = "0%";
     global.allGameObjects = [];
     global.score = 0;
     global.gameOver = false;

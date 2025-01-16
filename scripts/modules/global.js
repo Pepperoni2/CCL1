@@ -34,19 +34,8 @@ global.checkCollisionWithAnyOther = function (givenObject) {
         if (collided) {
             global.playerObject.reactToCollision(this.allGameObjects[i]);
             if (givenObject.active) global.allGameObjects[i].reactToCollision(givenObject);
-
             // log which objects collided
             // console.log(global.allGameObjects[i].name + " collided with " + givenObject.name);
-            // global.allGameObjects[i].reactToCollision(global.playerObject);
-            // if (givenObject.name === "ExpObject" && global.allGameObjects[i].name === "Enemy") {
-            //     global.playerObject.reactToCollision(this.allGameObjects[i]);
-            // }
-            // else {
-
-            //     if (givenObject.active) {
-            //         global.allGameObjects[i].reactToCollision(givenObject);
-            //     }
-            // }
         }
 
     }

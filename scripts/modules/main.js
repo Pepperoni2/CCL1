@@ -1,5 +1,6 @@
 import { global } from "./global.js";
 import { Character } from "../gameObjects/character.js";
+import { upgrades } from "./upgradeManager.js";
 
 let animationFrameId;
 
@@ -29,6 +30,10 @@ function gameLoop(totalRunningTime) {
 function setupGame() {
     document.querySelector("#gameOverScreen").style.display = "none";
     document.querySelector("#experienceBarFill").style.width = "0%";
+    for (let i = 0; i < upgrades.length; i++) {
+        upgrades[i].progress = 0;
+        
+    }
     global.allGameObjects = [];
     global.score = 0;
     global.gameOver = false;

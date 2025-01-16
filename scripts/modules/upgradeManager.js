@@ -78,4 +78,4 @@ function selectUpgrade(upgrade){
     global.IsupgradeSceneActive = false;
 }
 
-export { displayUpgradeCards }
+export {upgrades, displayUpgradeCards }

@@ -81,7 +81,7 @@ class Character extends BaseGameObject {
                 direction = Math.random() * 2 * Math.PI;
             }
             if(this.weapons.includes("pistol")){
-                new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 300, direction, this.dmgModifier);
+                new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 500, direction, this.dmgModifier);
             }
             else console.log("No weapon equipped");
             this.lastShotTime = currentTime;

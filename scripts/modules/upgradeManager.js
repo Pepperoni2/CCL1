@@ -65,7 +65,9 @@ function displayUpgradeCards(){
 }
 
 function getRandompgrades(count){
-    const shuffled = upgrades.sort(() => 0.5 - Math.random());
+    const avaiableUpgrades = upgrades.filter(obj => obj.progress <= obj.maxProgress);
+    console.log(avaiableUpgrades)
+    const shuffled = avaiableUpgrades.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
 }
 

@@ -29,7 +29,7 @@ const upgrades = [
         ],
         progress: 1,  // progress 1 because the player starts with the pistol, currently there is no plan on choosing which weapon you can equip from the start so this should be fine
         maxProgress: 4,
-        imagePath: "../images/level-up.png",
+        imagePath: "../assets/images/level-up.png",
         upgrade: function(){
             const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "pistol");
             this.progress++;
@@ -63,7 +63,7 @@ const upgrades = [
         ],
         progress: 0,
         maxProgress: 3,
-        imagePath: "../images/level-up.png",
+        imagePath: "../assets/images/level-up.png",
         upgrade: function(){
             this.progress++;
             global.playerObject.movementSpeed += global.playerObject.movementSpeed * 0.15; // increase movementSpeed by 15%
@@ -80,7 +80,7 @@ const upgrades = [
         ],
         progress: 0,    
         maxProgress: 4,
-        imagePath: "../images/level-up.png",
+        imagePath: "../assets/images/level-up.png",
         upgrade: function(){
             this.progress++;
             global.playerObject.damage += global.playerObject.damage * 0.1; // increase damage by 10%
@@ -98,7 +98,7 @@ const upgrades = [
         ],
         progress: 0,
         maxProgress: 5,
-        imagePath: "../images/level-up.png",
+        imagePath: "../assets/images/level-up.png",
         upgrade: function(){
             this.progress++;
             global.playerObject.healthRegeneration += 1; // increase health regeneration by 1
@@ -162,7 +162,6 @@ function updateProgressBar(progress){
 
 function getRandompgrades(count){
     const avaiableUpgrades = upgrades.filter(obj => obj.progress <= obj.maxProgress);
-    console.log(avaiableUpgrades)
     const shuffled = avaiableUpgrades.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
 }

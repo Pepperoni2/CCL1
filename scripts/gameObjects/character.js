@@ -93,7 +93,7 @@ class Character extends BaseGameObject {
                         let offsetY = 0;
                         for (let i = 0; i < weapon.projectileCount; i++) {
                             new Projectile(this.x + this.width / 2, this.y + (this.height / 2) + offsetY, 15, 15, 500, direction, this.dmgModifier, weapon.baseDamage);
-                            offsetY = 20;
+                            offsetY += 20;
                         }
                         break;
                     case "ElectricField":

@@ -144,6 +144,8 @@ body{
 .cardDescription{
     color: white;
     text-align: center;
+    font-size: 18px;
+    text-wrap: pretty;
 }
 .upperContainer{
     display: flex;

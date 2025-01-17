@@ -58,7 +58,6 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
 }
 
 global.ShowGameOverScreen = function(){
-    console.log("Game Over");
     global.playerObject.active = false;
     // hide upgrade screen if it is open
     document.querySelector("#upgradeScreen").style.display = "none";

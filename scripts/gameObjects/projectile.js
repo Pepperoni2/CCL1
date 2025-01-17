@@ -7,15 +7,15 @@ class Projectile extends BaseGameObject {
     xVelocity = 0;
     yVelocity = 0;
     movementSpeed = 1.5;
-    damage = 5;
+    damage = 0;  // Base damage
     dmgModifier = 1.0;
 
 
-    constructor (x,y, width, height, speed, direction, dmgModifier){ // 15x15
+    constructor (x,y, width, height, speed, direction, dmgModifier, baseDamage){ // 15x15
         super(x,y,width,height);
         this.speed = speed;
         this.direction = direction;
-        this.damage = this.damage * dmgModifier;
+        this.damage = baseDamage * dmgModifier;
     }
 
     update = function(){

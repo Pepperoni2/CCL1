@@ -2,25 +2,65 @@ import { global } from "./global.js";
 let progressBar = null;
 const upgrades = [
     // Weapons
+    // {
+    //     title: "Electric Field",
+    //     description:[
+    //         ""
+    //     ],
+    //     progress: 0,
+    //     maxProgress: 4,
+    //     imagePath: "../images/level-up.png",
+    //     equipWeapon: function(){
+    //         global.playerObject.weapons.push("ElectricField");
+    //         this.progress++;
+    //     },
+    //     upgrade: function(){
+    //         // tbd
+    //     }
+    // },
     {
-        title: "Electric Field",
-        description:[
-            ""
+        title: "Pistol",
+        description: [
+            "",
+            "Increase Base damage by 10%",
+            "Increase Base damage by 10% - Projectile + 1",
+            "Increase Base damage by 10%",
+            "Projectile + 1",
         ],
-        progress: 0,
+        progress: 1,  // progress 1 because the player starts with the pistol, currently there is no plan on choosing which weapon you can equip from the start so this should be fine
         maxProgress: 4,
         imagePath: "../images/level-up.png",
-        equipWeapon: function(){
-            global.playerObject.weapons.push("ElectricField");
-            this.progress++;
-        },
         upgrade: function(){
-            // tbd
+            const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "pistol");
+            this.progress++;
+            switch(this.progress){
+                case 2: 
+                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 10%
+                    break;
+                case 3:
+                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 20%
+                    global.playerObject.weapons[index].projectileCount += 1;
+                    break;
+                case 4:
+                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 30%
+                    break;
+                case 5:
+                    global.playerObject.weapons[index].projectileCount += 1;
+                    break;
+                default:
+                    // do nothing
+                    break;
+            }
         }
     },
     {
         title: "Movement Boost",
-        description: "Increaes the Movement speed of the player by 15%",
+        description: [
+            "Increase the Movement speed of the player by 15%",
+            "Increase the Movement speed of the player by 15%",
+            "Increase the Movement speed of the player by 15%",
+            "Increase the Movement speed of the player by 15%",
+        ],
         progress: 0,
         maxProgress: 3,
         imagePath: "../images/level-up.png",
@@ -31,9 +71,15 @@ const upgrades = [
     },
     {
         title: "Damage Boost",
-        description: "Increases the damage of the player by 10%",
+        description: [
+            "Increases the damage of the player by 10%",
+            "Increases the damage of the player by 10%",
+            "Increases the damage of the player by 10%",
+            "Increases the damage of the player by 10%",
+            "Increases the damage of the player by 10%",
+        ],
         progress: 0,    
-        maxProgress: 3,
+        maxProgress: 4,
         imagePath: "../images/level-up.png",
         upgrade: function(){
             this.progress++;
@@ -42,7 +88,14 @@ const upgrades = [
     },
     {
         title: "Health Regeneration",
-        description: "Increases your health regeneration by 1.0 per second",
+        description:[
+            "Increases your health regeneration by 1.0 per second",
+            "Increases your health regeneration by 1.0 per second",
+            "Increases your health regeneration by 1.0 per second",
+            "Increases your health regeneration by 1.0 per second",
+            "Increases your health regeneration by 1.0 per second",
+            "Increases your health regeneration by 1.0 per second",
+        ],
         progress: 0,
         maxProgress: 5,
         imagePath: "../images/level-up.png",
@@ -58,7 +111,6 @@ const upgrades = [
 function displayUpgradeCards(){
     let counter = 0;
     document.querySelector('#upgradeScreen').style.display = "block";
-    console.log("Displaying upgrade cards");
     const cards = document.querySelector("#cards");
     cards.innerHTML = "";
 
@@ -76,7 +128,7 @@ function displayUpgradeCards(){
             <div class="progress-bar-${counter}">Progress: ${upgrade.progress} ${upgrade.maxProgress}</div>
             </div>
             </div>
-            <p class="cardDescription">${upgrade.description}</p>
+            <p class="cardDescription">${upgrade.description[upgrade.progress]}</p>
             
         `;
         card.addEventListener("click", () => selectUpgrade(upgrade));

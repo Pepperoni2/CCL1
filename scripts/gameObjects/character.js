@@ -26,7 +26,11 @@ class Character extends BaseGameObject {
     constructor(x, y, width, height) {
         super(x, y, width, height);
         this.health = this.maxHealth;
-        this.weapons.push("pistol"); // every character will have a default weapon equipped
+        this.weapons.push({
+            name: "pistol",
+            baseDamage: 5,
+            projectileCount: 1,
+        }) // every character will have a default weapon equipped
         this.healthRegenIntervall = setInterval(() => {
             if(!global.IsupgradeSceneActive){
                 if (this.health >= this.maxHealth) this.health = this.maxHealth;
@@ -72,9 +76,6 @@ class Character extends BaseGameObject {
         this.level += 1;
         this.experience -= this.calculatedExperienceThreshold();
         this.experience < 0 ? this.experience = 0 : null;
-        this.movementSpeed += 10;
-        this.dmgModifier += 0.05;
-        console.log(`Level up! You are now level ${this.level}`);
         displayUpgradeCards();
     }
 
@@ -86,10 +87,19 @@ class Character extends BaseGameObject {
             if (this.yVelocity === 0 && this.xVelocity === 0) {
                 direction = Math.random() * 2 * Math.PI;
             }
-            if (this.weapons.includes("pistol")) {
-                new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 500, direction, this.dmgModifier);
-            }
-            else console.log("No weapon equipped");
+            this.weapons.forEach(weapon => {
+                switch(weapon.name){
+                    case "pistol":
+                        let offsetY = 0;
+                        for (let i = 0; i < weapon.projectileCount; i++) {
+                            new Projectile(this.x + this.width / 2, this.y + (this.height / 2) + offsetY, 15, 15, 500, direction, this.dmgModifier, weapon.baseDamage);
+                            offsetY = 20;
+                        }
+                        break;
+                    case "ElectricField":
+                        break;
+                }
+            });
             this.lastShotTime = currentTime;
         }
     }

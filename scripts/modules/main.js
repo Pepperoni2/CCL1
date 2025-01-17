@@ -31,7 +31,9 @@ function setupGame() {
     document.querySelector("#gameOverScreen").style.display = "none";
     document.querySelector("#experienceBarFill").style.width = "0%";
     for (let i = 0; i < upgrades.length; i++) {
-        upgrades[i].progress = 0;
+         // sets progress to 1 
+        if(upgrades[i].title === "Pistol") upgrades[i].progress = 1;
+        else upgrades[i].progress = 0;
     }
     global.allGameObjects = [];
     global.score = 0;
@@ -45,7 +47,7 @@ function setupGame() {
             clearInterval(enemyInterval);
          }
         else{
-            if(!global.IsupgradeSceneActive || !document.hidden) global.spawnEnemy();
+            if(!global.IsupgradeSceneActive) global.spawnEnemy();
         }
 
     }, spawnRate);

@@ -15,7 +15,7 @@ class Projectile extends BaseGameObject {
         super(x,y,width,height);
         this.speed = speed;
         this.direction = direction;
-        this.dmgModifier = dmgModifier;
+        this.damage = this.damage * dmgModifier;
     }
 
     update = function(){

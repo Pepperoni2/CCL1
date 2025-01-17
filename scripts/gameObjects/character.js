@@ -2,6 +2,7 @@ import { global } from "../modules/global.js";
 import { BaseGameObject } from "./baseGameObject.js";
 import { Projectile } from "./projectile.js";
 import { displayUpgradeCards } from "../modules/upgradeManager.js";
+import { ElectricField } from "./weapons/electricField.js";
 
 class Character extends BaseGameObject {
     // basic element properties
@@ -30,7 +31,7 @@ class Character extends BaseGameObject {
             name: "pistol",
             baseDamage: 5,
             projectileCount: 1,
-        }) // every character will have a default weapon equipped
+        }) 
         this.healthRegenIntervall = setInterval(() => {
             if(!global.IsupgradeSceneActive){
                 if (this.health >= this.maxHealth) this.health = this.maxHealth;
@@ -97,6 +98,13 @@ class Character extends BaseGameObject {
                         }
                         break;
                     case "ElectricField":
+                        console.log(global.applyFieldUpgrade)
+                        if (global.applyFieldUpgrade) {
+                            global.applyFieldUpgrade = false;
+                            console.log("Elektrik Feld wird erstellt")
+                            new ElectricField(this.x + this.width / 2, this.y + (this.height / 2), weapon.radius, weapon.baseDamage, weapon.duration, weapon.cooldown);
+                            
+                        }   
                         break;
                 }
             });
@@ -118,9 +126,6 @@ class Character extends BaseGameObject {
 
     reactToCollision = function (collidingObject) {
         switch (collidingObject.name) {
-            case "enemy":
-                this.health -= collidingObject.damage;
-                break;
             case "ExpObject":
                 collidingObject.active = false;
                 this.experience += collidingObject.exp;

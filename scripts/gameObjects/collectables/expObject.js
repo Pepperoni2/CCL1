@@ -9,20 +9,12 @@ class ExpObject extends BaseGameObject{
         global.allGameObjects.push(this);   
     }
 
-    // update = function(){
-
-    // }
-
     draw = function(){
         global.ctx.fillStyle = "violet";
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
     reactToCollision = function(){
-        // if(collidedObject.name === "Player"){
-        //     collidedObject.experience += this.exp;
-        //     this.active = false;
-        // }
     }
 }
 

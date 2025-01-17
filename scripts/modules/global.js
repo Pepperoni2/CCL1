@@ -13,6 +13,7 @@ global.gameTime = 0;
 global.gameOver = false;
 global.keysPressed = {};
 global.IsupgradeSceneActive = false;
+global.applyFieldUpgrade = false;
 
 global.getCanvasBounds = function () {
     let bounds =  {

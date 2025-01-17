@@ -2,22 +2,57 @@ import { global } from "./global.js";
 let progressBar = null;
 const upgrades = [
     // Weapons
-    // {
-    //     title: "Electric Field",
-    //     description:[
-    //         ""
-    //     ],
-    //     progress: 0,
-    //     maxProgress: 4,
-    //     imagePath: "../images/level-up.png",
-    //     equipWeapon: function(){
-    //         global.playerObject.weapons.push("ElectricField");
-    //         this.progress++;
-    //     },
-    //     upgrade: function(){
-    //         // tbd
-    //     }
-    // },
+    {
+        title: "Electric Field",
+        description:[
+            "An Electric Field appears around you - duration = 2s, cooldown = 5s",
+            "Increase Range and cooldown to 4.5 seconds ",
+            "Increase Damage and Range - cooldown reduced to 3s",
+            "Increase Damage and Range - cooldown reduced to 2s",
+            "The Electric Field is constantly activated!",
+        ],
+        progress: 0,
+        maxProgress: 4,
+        imagePath: "../assets/images/level-up.png",
+        equipWeapon: function(){
+            global.applyFieldUpgrade = true
+            global.playerObject.weapons.push({
+                name: "ElectricField",
+                alreadyEquipped: false,
+                baseDamage: 50,
+                range: 100,
+                cooldown: 5,
+                duration: 2,
+            });
+            global.applyFieldUpgrade = true;    
+            this.progress++;
+        },
+        upgrade: function(){
+
+            if(this.progress == 0){
+                this.equipWeapon();
+                return;
+            }
+            else{
+                this.progress++;
+                const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "ElectricField");
+                switch (this.progress) {
+                    case 1:
+                        global.playerObject.weapons[index].range += 20; // increase range
+                        global.applyFieldUpgrade = true
+                        break;
+                    case 2:
+                        global.playerObject.weapons[index].range += 20;
+                        global.applyFieldUpgrade = true
+                        break;
+                    default:
+                        // do nothing
+                        break;
+                }
+                
+            }
+        }
+    },
     {
         title: "Pistol",
         description: [

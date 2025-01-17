@@ -1,6 +1,23 @@
 import { global } from "./global.js";
 let progressBar = null;
 const upgrades = [
+    // Weapons
+    {
+        title: "Electric Field",
+        description:[
+            ""
+        ],
+        progress: 0,
+        maxProgress: 4,
+        imagePath: "../images/level-up.png",
+        equipWeapon: function(){
+            global.playerObject.weapons.push("ElectricField");
+            this.progress++;
+        },
+        upgrade: function(){
+            // tbd
+        }
+    },
     {
         title: "Movement Boost",
         description: "Increaes the Movement speed of the player by 15%",
@@ -33,7 +50,9 @@ const upgrades = [
             this.progress++;
             global.playerObject.healthRegeneration += 1; // increase health regeneration by 1
         }
-    }
+    },
+    
+
 ];
 
 function displayUpgradeCards(){

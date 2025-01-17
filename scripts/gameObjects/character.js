@@ -8,29 +8,35 @@ class Character extends BaseGameObject {
     name = "Player";
     xVelocity = 0;
     yVelocity = 0;
-    
-    
+
     // Game specific properties
-    health = 100;
+    maxHealth = 100;
+    health = 0;
     movementSpeed = 100;
-    damage = 10; 
     level = 1;
     experience = 0;
     movementFactor = 1.5;
     attackSpeed = 1.5;
-    healthRegeneration = 0.1; // Health Regeneration per second
+    healthRegeneration = 1; // Health Regeneration per second
     weapons = []; //equipped weapons
     lastShotTime = 0;
     experienceForNextLevel;
-    dmgModifier = 1.0;
+    dmgModifier = 1.0; // Damage modifier on every equipped weapon
 
-    constructor (x, y, width, height) {
+    constructor(x, y, width, height) {
         super(x, y, width, height);
+        this.health = this.maxHealth;
         this.weapons.push("pistol"); // every character will have a default weapon equipped
+        this.healthRegenIntervall = setInterval(() => {
+            if(!global.IsupgradeSceneActive){
+                if (this.health >= this.maxHealth) this.health = this.maxHealth;
+                else this.health += this.healthRegeneration;
+            }
+        }, 1000);
     }
-
-    update = function(){
-        if(this.health <= 0) {
+    update = function () {
+        if (this.health <= 0) {
+            clearInterval(this.healthRegenIntervall);
             this.health = 0;
             global.ShowGameOverScreen();
         }
@@ -47,22 +53,22 @@ class Character extends BaseGameObject {
         const magnitude = Math.sqrt(this.xVelocity ** 2 + this.yVelocity ** 2);
 
         // normalize the velocity vector and multiply it by the speed
-        if (magnitude > 0){
+        if (magnitude > 0) {
             this.xVelocity = (this.xVelocity / magnitude) * this.movementSpeed * this.movementFactor;
             this.yVelocity = (this.yVelocity / magnitude) * this.movementSpeed * this.movementFactor;
         }
 
         this.x += this.xVelocity * global.deltaTime;
         this.y += this.yVelocity * global.deltaTime;
+
         this.screenStop();
         this.attack();
-        while (this.experience >= this.experienceForNextLevel){
+        while (this.experience >= this.experienceForNextLevel) {
             this.levelUp();
         }
     }
 
-
-    levelUp = function(){
+    levelUp = function () {
         this.level += 1;
         this.experience -= this.calculatedExperienceThreshold();
         this.experience < 0 ? this.experience = 0 : null;
@@ -72,15 +78,15 @@ class Character extends BaseGameObject {
         displayUpgradeCards();
     }
 
-    attack = function(){
+    attack = function () {
         const currentTime = global.getTime();
         const attackRate = 1 / this.attackSpeed;
         if (currentTime - this.lastShotTime > attackRate) {
             let direction = Math.atan2(this.yVelocity, this.xVelocity);
-            if(this.yVelocity === 0 && this.xVelocity === 0){
+            if (this.yVelocity === 0 && this.xVelocity === 0) {
                 direction = Math.random() * 2 * Math.PI;
             }
-            if(this.weapons.includes("pistol")){
+            if (this.weapons.includes("pistol")) {
                 new Projectile(this.x + this.width / 2, this.y + this.height / 2, 15, 15, 500, direction, this.dmgModifier);
             }
             else console.log("No weapon equipped");
@@ -88,25 +94,20 @@ class Character extends BaseGameObject {
         }
     }
 
-    draw = function(){
+    draw = function () {
         global.ctx.fillStyle = "blue";
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
-
-        // Display level and experience
-        // global.ctx.fillStyle = "black";
-        // global.ctx.font = "16px Arial";
-        // global.ctx.fillText(`Level: ${this.level}`, this.x, this.y - 20);
         // Health bar
         global.ctx.fillStyle = "darkred";
         global.ctx.fillRect(this.x, this.y + this.height + 10, this.width * (this.health / 100), 5);
 
     }
-    calculatedExperienceThreshold = function(){
+    calculatedExperienceThreshold = function () {
         return Math.floor(10 * Math.pow(1.5, this.level - 1));
     };
-    
-    reactToCollision = function(collidingObject){
-        switch(collidingObject.name){
+
+    reactToCollision = function (collidingObject) {
+        switch (collidingObject.name) {
             case "enemy":
                 this.health -= collidingObject.damage;
                 break;
@@ -121,7 +122,7 @@ class Character extends BaseGameObject {
         }
     }
     // character stops at the edge of the canvas
-    screenStop = function(){
+    screenStop = function () {
         let canvasBox = global.getCanvasBounds();
         let characterBox = this.getBoxBounds();
 
@@ -139,7 +140,7 @@ class Character extends BaseGameObject {
         if (characterBox.bottom >= canvasBox.bottom) {
             this.y = canvasBox.bottom - this.height;
         }
-        
+
     }
 
 }

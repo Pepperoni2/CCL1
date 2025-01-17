@@ -1,5 +1,5 @@
 import { global } from "./global.js";
-
+let progressBar = null;
 const upgrades = [
     {
         title: "Movement Boost",
@@ -37,6 +37,7 @@ const upgrades = [
 ];
 
 function displayUpgradeCards(){
+    let counter = 0;
     document.querySelector('#upgradeScreen').style.display = "block";
     console.log("Displaying upgrade cards");
     const cards = document.querySelector("#cards");
@@ -45,6 +46,7 @@ function displayUpgradeCards(){
     const chosenUpgrades = getRandompgrades(2);
 
     chosenUpgrades.forEach(upgrade => {
+        counter++;
         const card = document.createElement("div");
         card.classList.add("card");
         card.innerHTML = `
@@ -52,7 +54,7 @@ function displayUpgradeCards(){
             <div class="cardImage"><img src="${upgrade.imagePath}" alt="Upgrade Image"></div>
             <div class="titleProgressContainer">
             <h3 class="cardTitle">${upgrade.title}</h3>
-            <p>Progress: ${upgrade.progress} ${upgrade.maxProgress}</p>
+            <div class="progress-bar-${counter}">Progress: ${upgrade.progress} ${upgrade.maxProgress}</div>
             </div>
             </div>
             <p class="cardDescription">${upgrade.description}</p>
@@ -60,8 +62,31 @@ function displayUpgradeCards(){
         `;
         card.addEventListener("click", () => selectUpgrade(upgrade));
         cards.appendChild(card);
+        initializeProgressBar(counter, upgrade.progress, upgrade.maxProgress);
     });
     global.IsupgradeSceneActive = true;
+}
+
+function initializeProgressBar(id, progress, maxProgress){
+    progressBar = document.querySelector(`.progress-bar-${id}`)
+    progressBar.innerHTML = "";
+    // Create blocks for the progress bar
+    for(let i = 0; i < maxProgress; i++){
+        const block = document.createElement("div");
+        block.className = "block"; //default block style
+        progressBar.appendChild(block)
+    }
+    updateProgressBar(progress);
+}
+function updateProgressBar(progress){
+    const blocks = progressBar.querySelectorAll(".block");
+
+    //Fill blocks up to the current progress
+    blocks.forEach((block, index) => {
+        if (index < progress){
+            block.classList.add("filled");
+        }
+    })
 }
 
 function getRandompgrades(count){

@@ -159,5 +159,19 @@ body{
     align-items: center;
 }
 
+.block {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #333;
+    background-color: #fff;
+    margin: 0 10px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.block.filled {
+    background-color: #4c91af; /* Green for filled blocks */
+}
+
 
 

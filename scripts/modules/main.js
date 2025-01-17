@@ -44,7 +44,9 @@ function setupGame() {
         if(!global.playerObject.active){ 
             clearInterval(enemyInterval);
          }
-        else global.spawnEnemy(); 
+        else{
+            if(!global.IsupgradeSceneActive || !document.hidden) global.spawnEnemy();
+        }
 
     }, spawnRate);
     animationFrameId = requestAnimationFrame(gameLoop);

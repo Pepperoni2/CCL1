@@ -40,7 +40,7 @@ function setupGame() {
     global.score = 0;
     global.gameOver = false;
     global.startTime = Date.now();
-    global.playerObject = new Character(640, 340, 60, 60);
+    global.playerObject = new Character(600, 330, 60, 60);
     const spawnRate = 2000; // 2 seconds
     const enemyInterval = setInterval(() => {
         // Stop spawning enemies if player is dead

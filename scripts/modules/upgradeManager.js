@@ -20,7 +20,7 @@ const upgrades = [
                 name: "ElectricField",
                 baseDamage: 50,
                 radius: 100,
-                duration: 0.5,
+                duration: 1,
                 cooldown: 5, 
             })
             global.applyFieldUpgrade = true
@@ -57,8 +57,8 @@ const upgrades = [
                         break;
                     case 5:
                         global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
-                        global.playerObject.weapons[index].duration = 0.1;
-                        global.playerObject.weapons[index].cooldown = 0.1;
+                        global.playerObject.weapons[index].duration = 0;
+                        global.playerObject.weapons[index].cooldown = 0;
                         break;
                     default:
                         // do nothing
@@ -69,92 +69,92 @@ const upgrades = [
             }
         }
     },
-    {
-        title: "Pistol",
-        description: [
-            "",
-            "Increase Base damage by 10%",
-            "Increase Base damage by 10% - Projectile + 1",
-            "Increase Base damage by 10%",
-            "Projectile + 1",
-        ],
-        progress: 1,  // progress 1 because the player starts with the pistol, currently there is no plan on choosing which weapon you can equip from the start so this should be fine
-        maxProgress: 4,
-        imagePath: "../assets/images/level-up.png",
-        upgrade: function(){
-            const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "pistol");
-            this.progress++;
-            switch(this.progress){
-                case 2: 
-                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 10%
-                    break;
-                case 3:
-                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 20%
-                    global.playerObject.weapons[index].projectileCount += 1;
-                    break;
-                case 4:
-                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 30%
-                    break;
-                case 5:
-                    global.playerObject.weapons[index].projectileCount += 1;
-                    break;
-                default:
-                    // do nothing
-                    break;
-            }
-        }
-    },
-    {
-        title: "Movement Boost",
-        description: [
-            "Increase the Movement speed of the player by 15%",
-            "Increase the Movement speed of the player by 15%",
-            "Increase the Movement speed of the player by 15%",
-            "Increase the Movement speed of the player by 15%",
-        ],
-        progress: 0,
-        maxProgress: 3,
-        imagePath: "../assets/images/level-up.png",
-        upgrade: function(){
-            this.progress++;
-            global.playerObject.movementSpeed += global.playerObject.movementSpeed * 0.15; // increase movementSpeed by 15%
-        }
-    },
-    {
-        title: "Damage Boost",
-        description: [
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
-        ],
-        progress: 0,    
-        maxProgress: 4,
-        imagePath: "../assets/images/level-up.png",
-        upgrade: function(){
-            this.progress++;
-            global.playerObject.dmgModifier += 0.1; // increase damage by 10%
-        }
-    },
-    {
-        title: "Health Regeneration",
-        description:[
-            "Increases your health regeneration by 1.0 per second",
-            "Increases your health regeneration by 1.0 per second",
-            "Increases your health regeneration by 1.0 per second",
-            "Increases your health regeneration by 1.0 per second",
-            "Increases your health regeneration by 1.0 per second",
-            "Increases your health regeneration by 1.0 per second",
-        ],
-        progress: 0,
-        maxProgress: 5,
-        imagePath: "../assets/images/level-up.png",
-        upgrade: function(){
-            this.progress++;
-            global.playerObject.healthRegeneration += 1; // increase health regeneration by 1
-        }
-    },
+    // {
+    //     title: "Pistol",
+    //     description: [
+    //         "",
+    //         "Increase Base damage by 10%",
+    //         "Increase Base damage by 10% - Projectile + 1",
+    //         "Increase Base damage by 10%",
+    //         "Projectile + 1",
+    //     ],
+    //     progress: 1,  // progress 1 because the player starts with the pistol, currently there is no plan on choosing which weapon you can equip from the start so this should be fine
+    //     maxProgress: 4,
+    //     imagePath: "../assets/images/level-up.png",
+    //     upgrade: function(){
+    //         const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "pistol");
+    //         this.progress++;
+    //         switch(this.progress){
+    //             case 2: 
+    //                 global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 10%
+    //                 break;
+    //             case 3:
+    //                 global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 20%
+    //                 global.playerObject.weapons[index].projectileCount += 1;
+    //                 break;
+    //             case 4:
+    //                 global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 30%
+    //                 break;
+    //             case 5:
+    //                 global.playerObject.weapons[index].projectileCount += 1;
+    //                 break;
+    //             default:
+    //                 // do nothing
+    //                 break;
+    //         }
+    //     }
+    // },
+    // {
+    //     title: "Movement Boost",
+    //     description: [
+    //         "Increase the Movement speed of the player by 15%",
+    //         "Increase the Movement speed of the player by 15%",
+    //         "Increase the Movement speed of the player by 15%",
+    //         "Increase the Movement speed of the player by 15%",
+    //     ],
+    //     progress: 0,
+    //     maxProgress: 3,
+    //     imagePath: "../assets/images/level-up.png",
+    //     upgrade: function(){
+    //         this.progress++;
+    //         global.playerObject.movementSpeed += global.playerObject.movementSpeed * 0.15; // increase movementSpeed by 15%
+    //     }
+    // },
+    // {
+    //     title: "Damage Boost",
+    //     description: [
+    //         "Increases the damage of the player by 10%",
+    //         "Increases the damage of the player by 10%",
+    //         "Increases the damage of the player by 10%",
+    //         "Increases the damage of the player by 10%",
+    //         "Increases the damage of the player by 10%",
+    //     ],
+    //     progress: 0,    
+    //     maxProgress: 4,
+    //     imagePath: "../assets/images/level-up.png",
+    //     upgrade: function(){
+    //         this.progress++;
+    //         global.playerObject.dmgModifier += 0.1; // increase damage by 10%
+    //     }
+    // },
+    // {
+    //     title: "Health Regeneration",
+    //     description:[
+    //         "Increases your health regeneration by 1.0 per second",
+    //         "Increases your health regeneration by 1.0 per second",
+    //         "Increases your health regeneration by 1.0 per second",
+    //         "Increases your health regeneration by 1.0 per second",
+    //         "Increases your health regeneration by 1.0 per second",
+    //         "Increases your health regeneration by 1.0 per second",
+    //     ],
+    //     progress: 0,
+    //     maxProgress: 5,
+    //     imagePath: "../assets/images/level-up.png",
+    //     upgrade: function(){
+    //         this.progress++;
+    //         global.playerObject.healthRegeneration += 1; // increase health regeneration by 1
+    //     }
+    // },
     
 
 ];

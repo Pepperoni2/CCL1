@@ -51,47 +51,49 @@ class Enemy extends BaseGameObject {
 
         // Draw damage numbers
         global.ctx.fillStyle = "black";
-        global.ctx.font = "16px Arial";
+        global.ctx.font = "bold 16px Arial";
         for (let dn of this.damageNumbers) {
             global.ctx.fillText(dn.value, dn.x, dn.y);
         }
     }
     reactToCollision = function(collidedObject){
         switch (collidedObject.name) {
+            case "ElectricField":
+                    // console.log(global.isActive);
+                    const distance = Math.sqrt(
+                        (this.x - collidedObject.x) ** 2 + (this.y - collidedObject.y) ** 2
+                    );
+                    // console.log(distance);
+                    // console.log(collidedObject.radius)
+                    if ((distance <= collidedObject.radius) && global.isActive) {
+                        this.health -= collidedObject.damage * global.deltaTime;
+                        // console.log("Enemy has received" + collidedObject.damage);
+                        // this.damageNumbers.push({
+                        //     value: `${parseFloat(collidedObject.damage * global.deltaTime).toFixed(0)}`,  // Text to display
+                        //     x: this.x + this.width / 2,         // Start at the enemy's center
+                        //     y: this.y - 10,                     // Slightly above the enemy
+                        //     time: 1                           // Duration (1 second)
+                        // });
+                        // console.log(
+                        //     `Enemy at (${this.x}, ${this.y}) took ${collidedObject.damage} damage! Remaining health: ${this.health}`
+                        // );
+                    }
+                break;
             case "Projectile":
                 collidedObject.active = false;
                 this.health -= collidedObject.damage;
                 
                 // Add a new damage number
                 this.damageNumbers.push({
-                    value: `${Math.floor(collidedObject.damage)}`,  // Text to display
+                    value: `${parseFloat(collidedObject.damage).toFixed(0)}`,  // Text to display
                     x: this.x + this.width / 2,         // Start at the enemy's center
                     y: this.y - 10,                     // Slightly above the enemy
-                    time: 1                           // Duration (0.5 seconds)
+                    time: 1                           // Duration (1 second)
                 });
 
                 break;
             case "Player":
                 collidedObject.health -= this.damage * global.deltaTime;
-                break;
-            case "ElectricField":
-                if (collidedObject.isActive){
-                    const distance = Math.sqrt(
-                        (this.x - collidedObject.x) ** 2 + (this.y - collidedObject.y) ** 2
-                    );
-                    if (distance <= collidedObject.radius) {
-                        this.health -= collidedObject.damage * global.deltaTime;
-                        this.damageNumbers.push({
-                            value: `${parseFloat(collidedObject.damage.toFixed(1))}`,  // Text to display
-                            x: this.x + this.width / 2,         // Start at the enemy's center
-                            y: this.y - 10,                     // Slightly above the enemy
-                            time: 1                           // Duration (0.5 seconds)
-                        });
-                        // console.log(
-                        //     `Enemy at (${this.x}, ${this.y}) took ${collidedObject.damage} damage! Remaining health: ${this.health}`
-                        // );
-                    }
-                }
                 break;
             default:
                 // do nothing

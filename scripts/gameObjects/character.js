@@ -92,10 +92,12 @@ class Character extends BaseGameObject {
             this.weapons.forEach(weapon => {
                 switch(weapon.name){
                     case "pistol":
-                        let offsetY = 0;
+                        let offsetY = 0,
+                            offsetX = 0;          
                         for (let i = 0; i < weapon.projectileCount; i++) {
-                            new Projectile(this.x + this.width / 2, this.y + (this.height / 2) + offsetY, 15, 15, 500, direction, this.dmgModifier, weapon.baseDamage);
+                            new Projectile(this.x + (this.width / 2) + offsetX, this.y + (this.height / 2) + offsetY, 15, 15, 500, direction, this.dmgModifier, weapon.baseDamage);
                             offsetY += 20;
+                            offsetX += 20;
                         }
                         break;
                     case "ElectricField":

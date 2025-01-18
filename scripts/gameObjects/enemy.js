@@ -9,6 +9,7 @@ class Enemy extends BaseGameObject {
         this.health = 10;
         this.damage = 50;
         this.speed = 30;
+        this.damageNumbers = []; // Array to store damage numbers
         global.allGameObjects.push(this)
     }
     update = function(){
@@ -30,6 +31,13 @@ class Enemy extends BaseGameObject {
         // Update position based on speed and deltaTime
         this.x += dirX * this.speed * global.deltaTime;
         this.y += dirY * this.speed * global.deltaTime;
+
+        // Update damage numbers
+        this.damageNumbers = this.damageNumbers.filter(dn => dn.time > 0);
+        for(let dn of this.damageNumbers){
+            dn.y -= 30 * global.deltaTime; // Move the number upwards
+            dn.time -= global.deltaTime; // Decrease its visibility duration
+        }
 
         if(this.health <= 0){
             global.score += 1;

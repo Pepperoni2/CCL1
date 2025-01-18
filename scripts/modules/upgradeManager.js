@@ -1,19 +1,19 @@
 import { global } from "./global.js";
-import { ElectricField } from "../gameObjects/weapons/electricField.js";
 let progressBar = null;
 const upgrades = [
     // Weapons
     {
         title: "Electric Field",
         description:[
-            "An Electric Field appears around you - duration = 2s, cooldown = 5s",
-            "Increase Range and cooldown to 4.5 seconds ",
-            "Increase Damage and Range - cooldown reduced to 3s",
-            "Increase Damage and Range - cooldown reduced to 2s",
-            "The Electric Field is constantly activated!",
+            "An Electric Field appears around you - duration = 0.5s, cooldown = 5s",
+            "Increase Radius of Elecric Field - duration = 1s",
+            "Increase Radius of Elecric Field - cooldown reduced to 4.5s",
+            "Increase Radius  of Elecric Field - Basedamage +10%, - cooldown reduced to 3s",
+            "Cooldown reduced to 2s",
+            "The Electric Field is constantly active! - Basedamage +10%",
         ],
         progress: 0,
-        maxProgress: 4,
+        maxProgress: 5,
         imagePath: "../assets/images/level-up.png",
         equipWeapon: function(){
             global.playerObject.weapons.push({
@@ -24,31 +24,48 @@ const upgrades = [
                 cooldown: 5, 
             })
             global.applyFieldUpgrade = true
-            this.progress++;
         },
         upgrade: function(){
 
             if(this.progress == 0){
                 this.equipWeapon();
-                return;
+                this.progress++;
             }
             else{
-                this.progress++;
                 const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "ElectricField");
                 switch (this.progress) {
                     case 1:
+                        // Increase the radius by 20 px
                         global.playerObject.weapons[index].radius += 20; // increase radius
+                        global.playerObject.weapons[index].duration = 1.0; // increase duration to 1 second
                         break;
                     case 2:
+                        // Increase the radius by 20 px
                         global.playerObject.weapons[index].radius += 20;
                         global.playerObject.weapons[index].cooldown = 4.5;
+                        break;
+                    case 3:
+                        // Increase the radius by 20 px
+                        global.playerObject.weapons[index].radius += 20;
+                        // Increase baseDamage by 10%
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
+                        // Cooldown reduced to
+                        global.playerObject.weapons[index].cooldown = 3.0;
+                        break;
+                    case 4: 
+                        global.playerObject.weapons[index].cooldown = 2.0;
+                        break;
+                    case 5:
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
+                        global.playerObject.weapons[index].duration = 0.1;
+                        global.playerObject.weapons[index].cooldown = 0.1;
                         break;
                     default:
                         // do nothing
                         break;
                 }
+                this.progress++;
                 global.applyFieldUpgrade = true;
-                console.log(global.applyFieldUpgrade);
             }
         }
     },
@@ -117,7 +134,7 @@ const upgrades = [
     //     imagePath: "../assets/images/level-up.png",
     //     upgrade: function(){
     //         this.progress++;
-    //         global.playerObject.dmgModifier +=  0.1; // increase damage by 10%
+    //         global.playerObject.dmgModifier += 0.1; // increase damage by 10%
     //     }
     // },
     // {

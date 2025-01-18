@@ -101,7 +101,7 @@ class Character extends BaseGameObject {
                     case "ElectricField":
                         if (global.applyFieldUpgrade) {
                             global.allGameObjects = global.allGameObjects.filter(obj => obj.name !== "ElectricField");
-                            new ElectricField(this.x + this.width / 2, this.y + (this.height / 2), weapon.radius, weapon.baseDamage, weapon.duration, weapon.cooldown) 
+                            new ElectricField(this.x + this.width / 2, this.y + (this.height / 2), weapon.radius, weapon.baseDamage * this.dmgModifier, weapon.duration, weapon.cooldown) 
                             global.applyFieldUpgrade = false;
                         }   
                         break;

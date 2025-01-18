@@ -48,6 +48,13 @@ class Enemy extends BaseGameObject {
     draw = function(){
         global.ctx.fillStyle = "red";
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        // Draw damage numbers
+        global.ctx.fillStyle = "black";
+        global.ctx.font = "16px Arial";
+        for (let dn of this.damageNumbers) {
+            global.ctx.fillText(dn.value, dn.x, dn.y);
+        }
     }
     reactToCollision = function(collidedObject){
         switch (collidedObject.name) {
@@ -55,6 +62,14 @@ class Enemy extends BaseGameObject {
                 collidedObject.active = false;
                 this.health -= collidedObject.damage;
                 
+                // Add a new damage number
+                this.damageNumbers.push({
+                    value: `${Math.floor(collidedObject.damage)}`,  // Text to display
+                    x: this.x + this.width / 2,         // Start at the enemy's center
+                    y: this.y - 10,                     // Slightly above the enemy
+                    time: 1                           // Duration (0.5 seconds)
+                });
+
                 break;
             case "Player":
                 collidedObject.health -= this.damage * global.deltaTime;
@@ -66,6 +81,12 @@ class Enemy extends BaseGameObject {
                     );
                     if (distance <= collidedObject.radius) {
                         this.health -= collidedObject.damage * global.deltaTime;
+                        this.damageNumbers.push({
+                            value: `${parseFloat(collidedObject.damage.toFixed(1))}`,  // Text to display
+                            x: this.x + this.width / 2,         // Start at the enemy's center
+                            y: this.y - 10,                     // Slightly above the enemy
+                            time: 1                           // Duration (0.5 seconds)
+                        });
                         // console.log(
                         //     `Enemy at (${this.x}, ${this.y}) took ${collidedObject.damage} damage! Remaining health: ${this.health}`
                         // );

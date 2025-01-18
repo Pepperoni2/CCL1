@@ -3,13 +3,14 @@ import { BaseGameObject } from "./baseGameObject.js";
 import { ExpObject } from "./collectables/expObject.js";
 
 class Enemy extends BaseGameObject {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, health, speed, exp) {
         super(x, y, width, height);
         this.name = "Enemy";
-        this.health = 10;
+        this.health = health; // 10
         this.damage = 50;
-        this.speed = 30;
+        this.speed = speed; // 30
         this.damageNumbers = []; // Array to store damage numbers
+        this.exp = exp
         global.allGameObjects.push(this)
     }
     update = function(){
@@ -42,7 +43,7 @@ class Enemy extends BaseGameObject {
         if(this.health <= 0){
             global.score += 1;
             this.active = false;
-            Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15) : null;  
+            Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp) : null;  
         }
     }
     draw = function(){

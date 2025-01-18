@@ -35,20 +35,23 @@ function gameLoop(totalRunningTime) {
 
 }
 
+
 function setupGame() {
     document.querySelector("#gameOverScreen").style.display = "none";
     document.querySelector("#experienceBarFill").style.width = "0%";
+    document.querySelector('#time').innerText = '0:00'; 
     for (let i = 0; i < upgrades.length; i++) {
          // sets progress to 1 
         if(upgrades[i].title === "Pistol") upgrades[i].progress = 1;
         else upgrades[i].progress = 0;
     }
     global.allGameObjects = [];
+    global.seconds = 0;
     global.score = 0;
     global.gameOver = false;
     global.startTime = Date.now();
     global.playerObject = new Character(600, 330, 60, 60);
-    const spawnRate = 2000; // 2 seconds
+    global.spawnRate = 2000; // 2 seconds
     const timer = setInterval(() => {
         if(!global.gameIsPaused){
             if(!global.playerObject.active){ 
@@ -60,17 +63,7 @@ function setupGame() {
         }
         
     }, 1000);
-    const enemyInterval = setInterval(() => {
-        if(!global.gameIsPaused){
-            if(!global.playerObject.active){ 
-                clearInterval(enemyInterval);
-            }
-            else{
-                // Stop spawning enemies if upgrade Screen is active
-                if(!global.IsupgradeSceneActive) global.spawnEnemy();
-            }
-        }
-    }, spawnRate);
+    ;
     animationFrameId = requestAnimationFrame(gameLoop);
 }
 setupGame();

@@ -16,6 +16,19 @@ global.IsupgradeSceneActive = false;
 global.applyFieldUpgrade = false;
 global.gameIsPaused = false;
 global.seconds = 0;
+global.spawnRate = 2000;
+global.newSpawnRate = false;
+global.enemyInterval = setInterval(() => {
+        if(!global.gameIsPaused){
+            if(!global.playerObject.active){ 
+                clearInterval(global.enemyInterval);
+            }
+            else{
+                // Stop spawning enemies if upgrade Screen is active
+                if(!global.IsupgradeSceneActive) global.spawnEnemy();
+            }
+        }
+    }, global.spawnRate)
 global.getCanvasBounds = function () {
     let bounds =  {
         "left": 0,
@@ -95,10 +108,34 @@ global.spawnEnemy = function(){
             break;
 
     }
-
-    new Enemy(randomX, randomY, 60, 60);
+    if(global.seconds < 60){
+        new Enemy(randomX, randomY, 60, 60, 10, 30, 10);
+    }
+    else if(global.seconds >= 60 && global.seconds <= 120){ // 1-2 minutes
+        global.newSpawnRate = true;
+        global.spawnRate = 1800;
+        new Enemy(randomX, randomY, 60, 60, 10, 35, 12);
+    }
+    else if(global.seconds >= 120 && global.seconds <= 240){ // 2-4 min
+        new Enemy(randomX, randomY, 60, 60, 15, 40, 15);
+    }
+    else if(global.seconds >= 240 && global.seconds <= 300){ // 4-5 min
+        new Enemy(randomX, randomY, 60, 60, 15, 45, 15);
+    }
+    else if(global.seconds >= 300 && global.seconds <= 420){ // 5-7 min
+        new Enemy(randomX, randomY, 60, 60, 15, 50, 20);
+    }
+    else if(global.seconds >= 420 && global.seconds <= 480){ // 7-8 min
+        new Enemy(randomX, randomY, 60, 60, 20, 50, 22);
+    }
+    else if(global.seconds >= 480 && global.seconds <= 600){ // 8-10 min
+        new Enemy(randomX, randomY, 60, 60, 20, 55, 25);
+    } 
+    else{       // > 10 min
+        new Enemy(randomX, randomY, 60, 60, 25, 60, 30);
+    }
+    
 }
-
 global.updateUI = function(){
     global.updateExperienceBar();
 }

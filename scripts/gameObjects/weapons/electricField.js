@@ -3,11 +3,10 @@ import { BaseGameObject } from "../baseGameObject.js";
 
 class ElectricField extends BaseGameObject{
     name = "ElectricField"
-    radius = 50;
     radius = 50;              // Radius of the AOE attack
     damage = 50;              // Base damage dealt to enemies
     duration = 0.5;           // Duration of the AOE in seconds
-    cooldown = 10;             // Cooldown time in seconds
+    cooldown = 1;             // Cooldown time in seconds
     isAvailable = true;       // Whether the AOE is ready to use
     lastActivationTime = 0;    // Timestamp of the last activation
     isActive = false;
@@ -18,11 +17,10 @@ class ElectricField extends BaseGameObject{
         this.damage = damage;          // Damage dealt to enemies
         this.duration = duration;      // Duration of the AOE effect (in seconds)
         this.cooldown = cooldown;      // Cooldown time (in seconds)
+        global.allGameObjects.push(this);
     }
 
     update = function(){
-        if(global.applyFieldUpgrade) this.active = false;
-        console.log("Im updating")
         this.x = global.playerObject.x + global.playerObject.width / 2;
         this.y = global.playerObject.y + global.playerObject.height / 2;
 
@@ -41,21 +39,18 @@ class ElectricField extends BaseGameObject{
 
         setTimeout(() => {
             this.isActive = false;
-            console.log("Electric Field deactivated.");
         }, this.duration * 1000)
 
         setTimeout(() => {
             this.isAvailable = true;
-            console.log("Electric Field is ready again!");
         }, this.cooldown * 1000);
     }
 
     draw = function(){
         if (!this.isActive) return;
-        console.log("drawing")
         global.ctx.beginPath();
         global.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        global.ctx.fillStyle =  "rgba(185, 201, 17, 0.5)"
+        global.ctx.fillStyle =  "rgba(9, 222, 218, 0.5)"
         global.ctx.fill();
         global.ctx.closePath();    
     }

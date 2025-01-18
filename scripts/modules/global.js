@@ -80,7 +80,7 @@ global.spawnEnemy = function(){
             randomX = -60;
             randomY = Math.random() * global.canvas.height;
             break;
-        case 1: //top
+        case 1: //top edge
             randomX = Math.random() * global.canvas.width;
             randomY = -60;
             break;

@@ -2,6 +2,7 @@ import { global } from "../modules/global.js";
 import { BaseGameObject } from "./baseGameObject.js";
 import { Projectile } from "./projectile.js";
 import { displayUpgradeCards } from "../modules/upgradeManager.js";
+import { ElectricField } from "./weapons/electricField.js";
 
 class Character extends BaseGameObject {
     // basic element properties
@@ -19,6 +20,7 @@ class Character extends BaseGameObject {
     attackSpeed = 1.5;
     healthRegeneration = 1; // Health Regeneration per second
     weapons = []; //equipped weapons
+    electricField = {};
     lastShotTime = 0;
     experienceForNextLevel;
     dmgModifier = 1.0; // Damage modifier on every equipped weapon
@@ -30,7 +32,7 @@ class Character extends BaseGameObject {
             name: "pistol",
             baseDamage: 5,
             projectileCount: 1,
-        }) // every character will have a default weapon equipped
+        }) 
         this.healthRegenIntervall = setInterval(() => {
             if(!global.IsupgradeSceneActive){
                 if (this.health >= this.maxHealth) this.health = this.maxHealth;
@@ -97,6 +99,11 @@ class Character extends BaseGameObject {
                         }
                         break;
                     case "ElectricField":
+                        if (global.applyFieldUpgrade) {
+                            global.allGameObjects = global.allGameObjects.filter(obj => obj.name !== "ElectricField");
+                            new ElectricField(this.x + this.width / 2, this.y + (this.height / 2), weapon.radius, weapon.baseDamage * this.dmgModifier, weapon.duration, weapon.cooldown) 
+                            global.applyFieldUpgrade = false;
+                        }   
                         break;
                 }
             });
@@ -113,14 +120,11 @@ class Character extends BaseGameObject {
 
     }
     calculatedExperienceThreshold = function () {
-        return Math.floor(10 * Math.pow(1.5, this.level - 1));
+        return Math.floor(20 * Math.pow(1.5, this.level - 1));
     };
 
     reactToCollision = function (collidingObject) {
         switch (collidingObject.name) {
-            case "enemy":
-                this.health -= collidingObject.damage;
-                break;
             case "ExpObject":
                 collidingObject.active = false;
                 this.experience += collidingObject.exp;

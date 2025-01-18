@@ -21,6 +21,7 @@ function gameLoop(totalRunningTime) {
         global.allGameObjects.forEach(obj => obj.update()); // Update all game objects
         global.allGameObjects.forEach(obj => obj.draw()); // Draw all game objects
         global.allGameObjects.forEach(obj => global.checkCollisionWithAnyOther(obj)); // Check for collisions between all game objects
+        // console.log(global.allGameObjects);            
     }
     global.updateUI(); // Update the experience bar of the player
     animationFrameId = requestAnimationFrame(gameLoop); // This keeps the gameLoop running indefinitely

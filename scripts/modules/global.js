@@ -13,6 +13,7 @@ global.gameTime = 0;
 global.gameOver = false;
 global.keysPressed = {};
 global.IsupgradeSceneActive = false;
+global.applyFieldUpgrade = false;
 
 global.getCanvasBounds = function () {
     let bounds =  {
@@ -79,7 +80,7 @@ global.spawnEnemy = function(){
             randomX = -60;
             randomY = Math.random() * global.canvas.height;
             break;
-        case 1: //top
+        case 1: //top edge
             randomX = Math.random() * global.canvas.width;
             randomY = -60;
             break;

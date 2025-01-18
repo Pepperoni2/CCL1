@@ -2,22 +2,73 @@ import { global } from "./global.js";
 let progressBar = null;
 const upgrades = [
     // Weapons
-    // {
-    //     title: "Electric Field",
-    //     description:[
-    //         ""
-    //     ],
-    //     progress: 0,
-    //     maxProgress: 4,
-    //     imagePath: "../images/level-up.png",
-    //     equipWeapon: function(){
-    //         global.playerObject.weapons.push("ElectricField");
-    //         this.progress++;
-    //     },
-    //     upgrade: function(){
-    //         // tbd
-    //     }
-    // },
+    {
+        title: "Electric Field",
+        description:[
+            "An Electric Field appears around you - duration = 0.5s, cooldown = 5s",
+            "Increase Radius of Elecric Field - duration = 1s",
+            "Increase Radius of Elecric Field - cooldown reduced to 4.5s",
+            "Increase Radius  of Elecric Field - Basedamage +10%, - cooldown reduced to 3s",
+            "Cooldown reduced to 2s",
+            "The Electric Field is constantly active! - Basedamage +10%",
+        ],
+        progress: 0,
+        maxProgress: 5,
+        imagePath: "../assets/images/level-up.png",
+        equipWeapon: function(){
+            global.playerObject.weapons.push({
+                name: "ElectricField",
+                baseDamage: 50,
+                radius: 100,
+                duration: 0.5,
+                cooldown: 5, 
+            })
+            global.applyFieldUpgrade = true
+        },
+        upgrade: function(){
+
+            if(this.progress == 0){
+                this.equipWeapon();
+                this.progress++;
+            }
+            else{
+                const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "ElectricField");
+                switch (this.progress) {
+                    case 1:
+                        // Increase the radius by 20 px
+                        global.playerObject.weapons[index].radius += 20; // increase radius
+                        global.playerObject.weapons[index].duration = 1.0; // increase duration to 1 second
+                        break;
+                    case 2:
+                        // Increase the radius by 20 px
+                        global.playerObject.weapons[index].radius += 20;
+                        global.playerObject.weapons[index].cooldown = 4.5;
+                        break;
+                    case 3:
+                        // Increase the radius by 20 px
+                        global.playerObject.weapons[index].radius += 20;
+                        // Increase baseDamage by 10%
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
+                        // Cooldown reduced to
+                        global.playerObject.weapons[index].cooldown = 3.0;
+                        break;
+                    case 4: 
+                        global.playerObject.weapons[index].cooldown = 2.0;
+                        break;
+                    case 5:
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
+                        global.playerObject.weapons[index].duration = 0.1;
+                        global.playerObject.weapons[index].cooldown = 0.1;
+                        break;
+                    default:
+                        // do nothing
+                        break;
+                }
+                this.progress++;
+                global.applyFieldUpgrade = true;
+            }
+        }
+    },
     {
         title: "Pistol",
         description: [
@@ -83,7 +134,7 @@ const upgrades = [
         imagePath: "../assets/images/level-up.png",
         upgrade: function(){
             this.progress++;
-            global.playerObject.damage += global.playerObject.damage * 0.1; // increase damage by 10%
+            global.playerObject.dmgModifier += 0.1; // increase damage by 10%
         }
     },
     {
@@ -109,18 +160,19 @@ const upgrades = [
 ];
 
 function displayUpgradeCards(){
-    let counter = 0;
-    document.querySelector('#upgradeScreen').style.display = "block";
-    const cards = document.querySelector("#cards");
-    cards.innerHTML = "";
-
     const chosenUpgrades = getRandompgrades(2);
 
-    chosenUpgrades.forEach(upgrade => {
-        counter++;
-        const card = document.createElement("div");
-        card.classList.add("card");
-        card.innerHTML = `
+    // Check if there are still upgrades avaiable 
+    if (chosenUpgrades.length != 0) { 
+        let counter = 0;
+        document.querySelector('#upgradeScreen').style.display = "block";
+        const cards = document.querySelector("#cards");
+        cards.innerHTML = "";
+        chosenUpgrades.forEach(upgrade => {
+            counter++;
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.innerHTML = `
             <div class="upperContainer">
             <div class="cardImage"><img src="${upgrade.imagePath}" alt="Upgrade Image"></div>
             <div class="titleProgressContainer">
@@ -131,11 +183,13 @@ function displayUpgradeCards(){
             <p class="cardDescription">${upgrade.description[upgrade.progress]}</p>
             
         `;
-        card.addEventListener("click", () => selectUpgrade(upgrade));
-        cards.appendChild(card);
-        initializeProgressBar(counter, upgrade.progress, upgrade.maxProgress);
-    });
-    global.IsupgradeSceneActive = true;
+            card.addEventListener("click", () => selectUpgrade(upgrade));
+            cards.appendChild(card);
+            initializeProgressBar(counter, upgrade.progress, upgrade.maxProgress);
+        });
+        global.IsupgradeSceneActive = true;
+    }
+    
 }
 
 function initializeProgressBar(id, progress, maxProgress){

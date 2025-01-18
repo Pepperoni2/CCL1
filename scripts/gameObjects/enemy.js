@@ -9,6 +9,7 @@ class Enemy extends BaseGameObject {
         this.health = 10;
         this.damage = 50;
         this.speed = 30;
+        this.damageNumbers = []; // Array to store damage numbers
         global.allGameObjects.push(this)
     }
     update = function(){
@@ -31,24 +32,66 @@ class Enemy extends BaseGameObject {
         this.x += dirX * this.speed * global.deltaTime;
         this.y += dirY * this.speed * global.deltaTime;
 
+        // Update damage numbers
+        this.damageNumbers = this.damageNumbers.filter(dn => dn.time > 0);
+        for(let dn of this.damageNumbers){
+            dn.y -= 30 * global.deltaTime; // Move the number upwards
+            dn.time -= global.deltaTime; // Decrease its visibility duration
+        }
+
+        if(this.health <= 0){
+            global.score += 1;
+            this.active = false;
+            Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15) : null;  
+        }
     }
     draw = function(){
         global.ctx.fillStyle = "red";
         global.ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        // Draw damage numbers
+        global.ctx.fillStyle = "black";
+        global.ctx.font = "16px Arial";
+        for (let dn of this.damageNumbers) {
+            global.ctx.fillText(dn.value, dn.x, dn.y);
+        }
     }
     reactToCollision = function(collidedObject){
         switch (collidedObject.name) {
             case "Projectile":
                 collidedObject.active = false;
                 this.health -= collidedObject.damage;
-                if(this.health <= 0){
-                    global.score += 1;
-                    this.active = false;
-                    Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15) : null;  
-                }
+                
+                // Add a new damage number
+                this.damageNumbers.push({
+                    value: `${Math.floor(collidedObject.damage)}`,  // Text to display
+                    x: this.x + this.width / 2,         // Start at the enemy's center
+                    y: this.y - 10,                     // Slightly above the enemy
+                    time: 1                           // Duration (0.5 seconds)
+                });
+
                 break;
             case "Player":
                 collidedObject.health -= this.damage * global.deltaTime;
+                break;
+            case "ElectricField":
+                if (collidedObject.isActive){
+                    const distance = Math.sqrt(
+                        (this.x - collidedObject.x) ** 2 + (this.y - collidedObject.y) ** 2
+                    );
+                    if (distance <= collidedObject.radius) {
+                        this.health -= collidedObject.damage * global.deltaTime;
+                        this.damageNumbers.push({
+                            value: `${parseFloat(collidedObject.damage.toFixed(1))}`,  // Text to display
+                            x: this.x + this.width / 2,         // Start at the enemy's center
+                            y: this.y - 10,                     // Slightly above the enemy
+                            time: 1                           // Duration (0.5 seconds)
+                        });
+                        // console.log(
+                        //     `Enemy at (${this.x}, ${this.y}) took ${collidedObject.damage} damage! Remaining health: ${this.health}`
+                        // );
+                    }
+                }
                 break;
             default:
                 // do nothing

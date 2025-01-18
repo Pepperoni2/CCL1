@@ -65,7 +65,7 @@ class Enemy extends BaseGameObject {
                     );
                     // console.log(distance);
                     // console.log(collidedObject.radius)
-                    if ((distance <= collidedObject.radius) && global.isActive) {
+                    if ((distance <= collidedObject.radius) && collidedObject.isActive) {
                         this.health -= collidedObject.damage * global.deltaTime;
                         // console.log("Enemy has received" + collidedObject.damage);
                         // this.damageNumbers.push({

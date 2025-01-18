@@ -5,6 +5,13 @@ import { upgrades } from "./upgradeManager.js";
 let animationFrameId;
 
 function gameLoop(totalRunningTime) { 
+    if(global.gameIsPaused){
+        global.deltaTime = totalRunningTime - global.prevTotalRunningTime; // Time in milliseconds between frames
+        global.deltaTime /= 1000; // Convert milliseconds to seconds for consistency in calculations
+        global.prevTotalRunningTime = totalRunningTime; // Save the current state of "totalRunningTime", so at the next call of gameLoop (== next frame) to calculate deltaTime again for that next frame.
+        animationFrameId = requestAnimationFrame(gameLoop); // This keeps the gameLoop running indefinitely
+        return;
+    } 
     // Stop the game loop if the player is dead
     if (!global.playerObject.active){
         cancelAnimationFrame(animationFrameId);
@@ -22,8 +29,8 @@ function gameLoop(totalRunningTime) {
         global.allGameObjects.forEach(obj => obj.draw()); // Draw all game objects
         global.allGameObjects.forEach(obj => global.checkCollisionWithAnyOther(obj)); // Check for collisions between all game objects
         // console.log(global.allGameObjects);            
+        global.updateUI(); // Update the experience bar of the player
     }
-    global.updateUI(); // Update the experience bar of the player
     animationFrameId = requestAnimationFrame(gameLoop); // This keeps the gameLoop running indefinitely
 
 }
@@ -42,15 +49,27 @@ function setupGame() {
     global.startTime = Date.now();
     global.playerObject = new Character(600, 330, 60, 60);
     const spawnRate = 2000; // 2 seconds
-    const enemyInterval = setInterval(() => {
-        // Stop spawning enemies if player is dead
-        if(!global.playerObject.active){ 
-            clearInterval(enemyInterval);
-         }
-        else{
-            if(!global.IsupgradeSceneActive) global.spawnEnemy();
+    const timer = setInterval(() => {
+        if(!global.gameIsPaused){
+            if(!global.playerObject.active){ 
+                clearInterval(timer);
+            }
+            else{
+                if(!global.IsupgradeSceneActive) global.updateTime();
+            }
         }
-
+        
+    }, 1000);
+    const enemyInterval = setInterval(() => {
+        if(!global.gameIsPaused){
+            if(!global.playerObject.active){ 
+                clearInterval(enemyInterval);
+            }
+            else{
+                // Stop spawning enemies if upgrade Screen is active
+                if(!global.IsupgradeSceneActive) global.spawnEnemy();
+            }
+        }
     }, spawnRate);
     animationFrameId = requestAnimationFrame(gameLoop);
 }
@@ -64,6 +83,16 @@ document.addEventListener("visibilitychange", () => {
 });
 
 document.addEventListener("keydown", (event) => {
+    if(event.key == "Escape"){
+        if(global.gameIsPaused){
+            global.gameIsPaused = false;
+            document.querySelector('#PauseScreen').style.display = "none";
+        }
+        else{
+            global.gameIsPaused = true;
+            document.querySelector('#PauseScreen').style.display = "flex";
+        }
+    }
     if(!global.playerObject.active && event.key === "Enter"){
         setupGame();
     }

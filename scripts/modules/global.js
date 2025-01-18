@@ -14,8 +14,8 @@ global.gameOver = false;
 global.keysPressed = {};
 global.IsupgradeSceneActive = false;
 global.applyFieldUpgrade = false;
-global.isActive = false;
-
+global.gameIsPaused = false;
+global.seconds = 0;
 global.getCanvasBounds = function () {
     let bounds =  {
         "left": 0,
@@ -101,11 +101,10 @@ global.spawnEnemy = function(){
 
 global.updateUI = function(){
     global.updateExperienceBar();
-    global.updateTime();
-    
 }
 global.updateTime = function(){
-    document.querySelector("#time").innerHTML = global.formatTime(global.getTime());
+    global.seconds++;
+    document.querySelector("#time").innerHTML = global.formatTime(global.seconds);
 }
 
 global.updateExperienceBar = function(){
@@ -120,5 +119,6 @@ global.formatTime = function(seconds){
     
     return `${minutes}:${remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds}`;
 }
+
 
 export { global }

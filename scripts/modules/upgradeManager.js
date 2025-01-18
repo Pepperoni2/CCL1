@@ -177,11 +177,10 @@ function displayUpgradeCards(){
             <div class="cardImage"><img src="${upgrade.imagePath}" alt="Upgrade Image"></div>
             <div class="titleProgressContainer">
             <h3 class="cardTitle">${upgrade.title}</h3>
-            <div class="progress-bar-${counter}">Progress: ${upgrade.progress} ${upgrade.maxProgress}</div>
+            <div class="progress-bar-${counter}"></div>
             </div>
             </div>
             <p class="cardDescription">${upgrade.description[upgrade.progress]}</p>
-            
         `;
             card.addEventListener("click", () => selectUpgrade(upgrade));
             cards.appendChild(card);

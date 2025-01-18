@@ -4,12 +4,12 @@ import { BaseGameObject } from "../baseGameObject.js";
 class ElectricField extends BaseGameObject{
     name = "ElectricField"
     radius = 50;              // Radius of the AOE attack
-    damage = 50;              // Base damage dealt to enemies
+    damage = 60;              // Base damage dealt to enemies
     duration = 0.5;           // Duration of the AOE in seconds
     cooldown = 1;             // Cooldown time in seconds
     isAvailable = true;       // Whether the AOE is ready to use
     lastActivationTime = 0;    // Timestamp of the last activation
-
+    isActive = false;
 
     constructor(x, y, radius, damage, duration, cooldown){
         super(x, y, radius * 2, radius * 2); // AOE bounds (circle within a box)
@@ -18,7 +18,6 @@ class ElectricField extends BaseGameObject{
         this.duration = duration;      // Duration of the AOE effect (in seconds)
         this.cooldown = cooldown;      // Cooldown time (in seconds)
         global.allGameObjects.push(this);
-        global.isActive = false;
     }
 
     update = function(){
@@ -26,9 +25,9 @@ class ElectricField extends BaseGameObject{
         this.y = global.playerObject.y + global.playerObject.height / 2;
 
         const currentTime = global.getTime();
-        if(!global.isActive && this.isAvailable && currentTime - this.lastActivationTime >= this.cooldown){
+        if(!this.isActive && this.isAvailable && currentTime - this.lastActivationTime >= this.cooldown){
             if(this.cooldown == 0 || this.duration == 0){
-                global.isActive = true;
+                this.isActive = true;
                 this.isAvailable = true;
             }
             else{
@@ -38,20 +37,19 @@ class ElectricField extends BaseGameObject{
     }
 
     activate = function(){
-        if(!this.isAvailable || global.isActive) return;
+        if(!this.isAvailable || this.isActive) return;
 
         this.isAvailable = false;
         this.lastActivationTime = global.getTime();
-        global.isActive = true;
+        this.isActive = true;
         const cycle = () => {
             // Activate for 2 seconds
-            global.isActive = true;
+            this.isActive = true;
             setTimeout(() => {
-                global.isActive = false; // Deactivate
+                this.isActive = false; // Deactivate
                 this.isAvailable = false;
                 setTimeout(() => {
                     // After 5 seconds cooldown, rinse and repeat
-                    global.isActive = true
                     this.isAvailable = true
                     cycle();
                 }, this.cooldown * 1000);
@@ -71,7 +69,7 @@ class ElectricField extends BaseGameObject{
     }
 
     draw = function(){
-        if (!global.isActive) return;
+        if (!this.isActive) return;
         global.ctx.beginPath();
         global.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         global.ctx.fillStyle =  "rgba(9, 222, 218, 0.2)"

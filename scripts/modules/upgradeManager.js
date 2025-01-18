@@ -194,6 +194,10 @@ function displayUpgradeCards(){
 function initializeProgressBar(id, progress, maxProgress){
     progressBar = document.querySelector(`.progress-bar-${id}`)
     progressBar.innerHTML = "";
+    const lvlStat = document.createElement("div");
+    lvlStat.classList.add("lvl");
+    progressBar.appendChild(lvlStat);
+    lvlStat.innerHTML = `Lvl.${progress} => ${(progress) == maxProgress ? 'MAX': progress + 1}`;
     // Create blocks for the progress bar
     for(let i = 0; i < maxProgress; i++){
         const block = document.createElement("div");

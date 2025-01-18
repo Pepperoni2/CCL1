@@ -161,6 +161,11 @@ body{
     align-items: center;
 }
 
+.lvl{
+    padding: 10px;
+    text-align: center;
+}
+
 .block {
     width: 15px;
     height: 15px;

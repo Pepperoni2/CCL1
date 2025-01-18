@@ -18,17 +18,7 @@ global.gameIsPaused = false;
 global.seconds = 0;
 global.spawnRate = 2000;
 global.newSpawnRate = false;
-global.enemyInterval = setInterval(() => {
-        if(!global.gameIsPaused){
-            if(!global.playerObject.active){ 
-                clearInterval(global.enemyInterval);
-            }
-            else{
-                // Stop spawning enemies if upgrade Screen is active
-                if(!global.IsupgradeSceneActive) global.spawnEnemy();
-            }
-        }
-    }, global.spawnRate)
+
 global.getCanvasBounds = function () {
     let bounds =  {
         "left": 0,

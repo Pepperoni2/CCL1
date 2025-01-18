@@ -63,7 +63,17 @@ function setupGame() {
         }
         
     }, 1000);
-    ;
+    global.enemyInterval = setInterval(() => {
+        if(!global.gameIsPaused){
+            if(!global.playerObject.active){ 
+                clearInterval(global.enemyInterval);
+            }
+            else{
+                // Stop spawning enemies if upgrade Screen is active
+                if(!global.IsupgradeSceneActive) global.spawnEnemy();
+            }
+        }
+    }, global.spawnRate);
     animationFrameId = requestAnimationFrame(gameLoop);
 }
 setupGame();

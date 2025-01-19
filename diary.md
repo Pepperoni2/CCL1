@@ -27,3 +27,39 @@ and canceledAnimationFrame
 added animationFrameId
 
 Tomorrow: startScreen, upgrade cards, gameloop optimiziation
+
+16.01.2025
+adjusted experience bar
+added visual reset for expbar when Restarting the game
+
+New Font, actionPause, upgrade
+added asset folder, upgradeManager.js
+added some basic styling for the upgradeMenu
+
+added new flag for pausing game in global
+
+Update main.js
+global.updateUI() runs even after game is in upgradeScreen
+resetting Upgrade progress
+resetting upgrade progress when gameOver
+
+17.01.2025
+tweaked Upgrades
+upgrades now disappear, when progress has been exceded
+upgrade menu styling
+added blocks to represent upgrade progress
+
+implemented upgrades
+upgrades now affect the player stats
+
+starting to implement new weapons
+added weapons object array
+implemented upgrade path for pistol
+
+18.01.2025
+Implemented electric field weapon, damage numbers
+dynamic enemy scaling, upgrademenu styling, remade timer;
+
+19.01.2025
+adjusted enemy scaling and spawn rate
+added new sprites and loading sprites into game

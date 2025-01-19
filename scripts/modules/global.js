@@ -76,6 +76,38 @@ global.getTime = function(){
     return (Date.now() - global.startTime) / 1000; // Elapsed time in seconds
 }
 
+global.adjustSpawnRate = function(){
+
+    if (global.seconds >= 60 && global.spawnRate > 1500) {
+        global.spawnRate -= 200; // Faster scaling after 1 minute
+    } else if (global.seconds >= 300 && global.spawnRate > 1000) {
+        global.spawnRate -= 150; // Further decrease after 5 minutes
+    } else if (global.spawnRate > 500) {
+        global.spawnRate -= 100; // Gradual scaling otherwise
+    }
+    else {      // minimum 500 miliseconds spawnrate
+        global.spawnRate = 500;
+    }
+
+    //Clear and reset interval
+    clearInterval(global.enemyInterval);
+    global.enemyInterval = setInterval(() => {
+        if(!global.gameIsPaused){
+            if(!global.playerObject.active){ 
+                clearInterval(global.enemyInterval);
+            }
+            else{
+                // Stop spawning enemies if upgrade Screen is active
+                if(!global.IsupgradeSceneActive) global.spawnEnemy();
+            }
+        }
+    }, global.spawnRate);
+}
+
+global.spawnRateAdjuster = setInterval(() => {
+    global.adjustSpawnRate();
+}, 30000); // Adjust every 30 seconds
+
 global.spawnEnemy = function(){
     let edge = Math.floor(Math.random() * 4);
     let randomX, randomY;
@@ -98,6 +130,7 @@ global.spawnEnemy = function(){
             break;
 
     }
+
     if(global.seconds < 60){
         new Enemy(randomX, randomY, 60, 60, 10, 30, 10);
     }

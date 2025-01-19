@@ -3,7 +3,7 @@ import { BaseGameObject } from "./baseGameObject.js";
 import { ExpObject } from "./collectables/expObject.js";
 
 class Enemy extends BaseGameObject {
-    constructor(x, y, width, height, health, speed, exp) {
+    constructor(x, y, width, height, health, speed, exp, spritePath) {
         super(x, y, width, height);
         this.name = "Enemy";
         this.health = health; // 10
@@ -12,6 +12,8 @@ class Enemy extends BaseGameObject {
         this.damageNumbers = []; // Array to store damage numbers
         this.exp = exp
         global.allGameObjects.push(this)
+        this.loadImages([spritePath]);
+        
     }
     update = function(){
         const player = global.playerObject;
@@ -47,12 +49,14 @@ class Enemy extends BaseGameObject {
         }
     }
     draw = function(){
-        global.ctx.fillStyle = "red";
-        global.ctx.fillRect(this.x, this.y, this.width, this.height);
-
+        // global.ctx.fillStyle = "red";
+        // global.ctx.fillRect(this.x, this.y, this.width, this.height);
+        let sprite = this.getNextSprite();
+        global.ctx.drawImage(sprite, this.x, this.y, this.width, this.height);
+        
         // Draw damage numbers
         global.ctx.fillStyle = "black";
-        global.ctx.font = "bold 16px Arial";
+        global.ctx.font = "bold 20px Arial";
         for (let dn of this.damageNumbers) {
             global.ctx.fillText(dn.value, dn.x, dn.y);
         }

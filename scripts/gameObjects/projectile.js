@@ -16,6 +16,7 @@ class Projectile extends BaseGameObject {
         this.speed = speed;
         this.direction = direction;
         this.damage = baseDamage * dmgModifier;
+        this.loadImages(["../assets/sprites/Bullet.png"]);
     }
 
     update = function(){
@@ -24,10 +25,10 @@ class Projectile extends BaseGameObject {
         this.checkCanvasEdge();
     }
 
-    draw = function(){
-        global.ctx.fillStyle = "orange";
-        global.ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
+    // draw = function(){
+    //     global.ctx.fillStyle = "orange";
+    //     global.ctx.fillRect(this.x, this.y, this.width, this.height);
+    // }
 
     reactToCollision = function(){
     }

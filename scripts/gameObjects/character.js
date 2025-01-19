@@ -95,7 +95,7 @@ class Character extends BaseGameObject {
                         let offsetY = 0,
                             offsetX = 0;          
                         for (let i = 0; i < weapon.projectileCount; i++) {
-                            new Projectile(this.x + (this.width / 2) + offsetX, this.y + (this.height / 2) + offsetY, 15, 15, 500, direction, this.dmgModifier, weapon.baseDamage);
+                            new Projectile(this.x + (this.width / 2) + offsetX, this.y + (this.height / 2) + offsetY, 16, 16, 500, direction, this.dmgModifier, weapon.baseDamage);
                             offsetY += 20;
                             offsetX += 20;
                         }

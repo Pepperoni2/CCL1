@@ -7,15 +7,13 @@ class ExpObject extends BaseGameObject{
         this.name = "ExpObject";
         this.exp = exp;
         global.allGameObjects.push(this);   
+        this.loadImages(["../assets/sprites/EXP_Orb.png"])
     }
 
-    draw = function(){
-        global.ctx.fillStyle = "violet";
-        global.ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-
-    reactToCollision = function(){
-    }
+    // draw = function(){
+    //     global.ctx.fillStyle = "violet";
+    //     global.ctx.fillRect(this.x, this.y, this.width, this.height);
+    // }
 }
 
 export { ExpObject }

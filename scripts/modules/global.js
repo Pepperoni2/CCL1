@@ -132,30 +132,30 @@ global.spawnEnemy = function(){
     }
 
     if(global.seconds < 60){
-        new Enemy(randomX, randomY, 60, 60, 10, 30, 10);
+        new Enemy(randomX, randomY, 60, 60, 10, 30, 10, "../assets/sprites/Enemy.png");
     }
     else if(global.seconds >= 60 && global.seconds <= 120){ // 1-2 minutes
         global.newSpawnRate = true;
         global.spawnRate = 1800;
-        new Enemy(randomX, randomY, 60, 60, 10, 35, 12);
+        new Enemy(randomX, randomY, 60, 60, 10, 35, 12, "../assets/sprites/Enemy.png");
     }
     else if(global.seconds >= 120 && global.seconds <= 240){ // 2-4 min
-        new Enemy(randomX, randomY, 60, 60, 15, 40, 15);
+        new Enemy(randomX, randomY, 60, 60, 15, 40, 15, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 240 && global.seconds <= 300){ // 4-5 min
-        new Enemy(randomX, randomY, 60, 60, 15, 45, 15);
+        new Enemy(randomX, randomY, 60, 60, 15, 45, 15, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 300 && global.seconds <= 420){ // 5-7 min
-        new Enemy(randomX, randomY, 60, 60, 15, 50, 20);
+        new Enemy(randomX, randomY, 60, 60, 15, 50, 20, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 420 && global.seconds <= 480){ // 7-8 min
-        new Enemy(randomX, randomY, 60, 60, 20, 50, 25);
+        new Enemy(randomX, randomY, 60, 60, 20, 50, 25, "../assets/sprites/Enemy_3.png");
     }
     else if(global.seconds >= 480 && global.seconds <= 600){ // 8-10 min
-        new Enemy(randomX, randomY, 60, 60, 20, 55, 30);
+        new Enemy(randomX, randomY, 60, 60, 20, 55, 30, "../assets/sprites/Enemy_3.png");
     } 
     else{       // > 10 min
-        new Enemy(randomX, randomY, 60, 60, 25, 60, 35);
+        new Enemy(randomX, randomY, 60, 60, 25, 60, 35, "../assets/sprites/Enemy_3.png");
     }
     
 }

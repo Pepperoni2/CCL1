@@ -11,6 +11,16 @@ class ElectricField extends BaseGameObject{
     lastActivationTime = 0;    // Timestamp of the last activation
     isActive = false;
 
+    animationData = {
+        "animationSprites": [],
+        "timePerSprite": 0.08,
+        "currentSpriteElapsedTime": 0,
+        "firstSpriteIndex": 0,
+        "lastSpriteIndex": 2,
+        "currentSpriteIndex": 0
+    };
+
+
     constructor(x, y, radius, damage, duration, cooldown){
         super(x, y, radius * 2, radius * 2); // AOE bounds (circle within a box)
         this.radius = radius;          // Radius of the AOE
@@ -57,24 +67,19 @@ class ElectricField extends BaseGameObject{
         }
 
         cycle();
-        // setTimeout(() => {
-        //     this.isActive = true;
-        //     this.isAvailable = false;
-        // }, this.duration * 1000)
-
-        // setTimeout(() => {
-        //     this.isAvailable = true;
-        //     this.isActive = false;
-        // }, this.cooldown * 1000);
     }
 
     draw = function(){
         if (!this.isActive) return;
-        global.ctx.beginPath();
-        global.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        global.ctx.fillStyle =  "rgba(9, 222, 218, 0.2)"
-        global.ctx.fill();
-        global.ctx.closePath();    
+        this.loadImages(["../assets/sprites/ElectricField_1.png", "../assets/sprites/ElectricField_2.png", "../assets/sprites/ElectricField_3.png"])
+        // this.loadImagesFromSpritesheet("../assets/sprites/ElectricField-sheet.png", 3, 1);
+        let sprite = this.getNextSprite();
+        global.ctx.drawImage(sprite, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+        // global.ctx.beginPath();
+        // global.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        // global.ctx.fillStyle =  "rgba(9, 222, 218, 0.2)"
+        // global.ctx.fill();
+        // global.ctx.closePath();    
     }
 
 }

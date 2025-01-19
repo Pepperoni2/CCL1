@@ -149,13 +149,13 @@ global.spawnEnemy = function(){
         new Enemy(randomX, randomY, 60, 60, 15, 50, 20);
     }
     else if(global.seconds >= 420 && global.seconds <= 480){ // 7-8 min
-        new Enemy(randomX, randomY, 60, 60, 20, 50, 22);
+        new Enemy(randomX, randomY, 60, 60, 20, 50, 25);
     }
     else if(global.seconds >= 480 && global.seconds <= 600){ // 8-10 min
-        new Enemy(randomX, randomY, 60, 60, 20, 55, 25);
+        new Enemy(randomX, randomY, 60, 60, 20, 55, 30);
     } 
     else{       // > 10 min
-        new Enemy(randomX, randomY, 60, 60, 25, 60, 30);
+        new Enemy(randomX, randomY, 60, 60, 25, 60, 35);
     }
     
 }

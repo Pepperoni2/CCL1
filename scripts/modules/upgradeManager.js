@@ -7,10 +7,10 @@ const upgrades = [
         description:[
             "An Electric Field appears around you - duration = 0.5s, cooldown = 5s",
             "Increase Radius of Elecric Field - duration = 1s",
-            "Increase Radius of Elecric Field - cooldown reduced to 4.5s",
+            "Increase Radius of Elecric Field - cooldown reduced to 4.5s - baseDamage +10%",
             "Increase Radius  of Elecric Field - Basedamage +10%, - cooldown reduced to 3s",
             "Cooldown reduced to 2s",
-            "The Electric Field is constantly active! - Basedamage +10%",
+            "The Electric Field is constantly active! - Basedamage +30%",
         ],
         progress: 0,
         maxProgress: 5,
@@ -43,6 +43,8 @@ const upgrades = [
                         // Increase the radius by 20 px
                         global.playerObject.weapons[index].radius += 20;
                         global.playerObject.weapons[index].cooldown = 4.5;
+                        // Increase baseDamage by 10%
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
                         break;
                     case 3:
                         // Increase the radius by 20 px
@@ -56,7 +58,7 @@ const upgrades = [
                         global.playerObject.weapons[index].cooldown = 2.0;
                         break;
                     case 5:
-                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.3;
                         global.playerObject.weapons[index].duration = 0;
                         global.playerObject.weapons[index].cooldown = 0;
                         break;
@@ -123,18 +125,35 @@ const upgrades = [
     {
         title: "Damage Boost",
         description: [
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
-            "Increases the damage of the player by 10%",
+            "Increases the damage of the player by 20%",
+            "Increases the damage of the player by 20%",
+            "Increases the damage of the player by 20%",
+            "Increases the damage of the player by 30%",
+            "Increases the damage of the player by 50%",
         ],
         progress: 0,    
         maxProgress: 4,
         imagePath: "../assets/images/level-up.png",
         upgrade: function(){
+            switch(this.progress){
+                case 0:
+                    global.playerObject.dmgModifier += 0.2;  // increase damage by 20%
+                    break;
+                case 1:
+                    global.playerObject.dmgModifier += 0.2;  // increase damage by 20%
+                    break;
+                case 2:
+                    global.playerObject.dmgModifier += 0.2;  // increase damage by 20%
+                    break;
+                case 3:
+                    global.playerObject.dmgModifier += 0.3;  // increase damage by 30%
+                    break;
+                case 4:
+                    global.playerObject.dmgModifier += 0.5;  // increase damage by 50%
+                    break;
+            }
             this.progress++;
-            global.playerObject.dmgModifier += 0.1; // increase damage by 10%
+             
         }
     },
     {

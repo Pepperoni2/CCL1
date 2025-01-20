@@ -101,4 +101,6 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+window.global = global;
+
 

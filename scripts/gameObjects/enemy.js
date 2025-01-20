@@ -64,7 +64,7 @@ class Enemy extends BaseGameObject {
     reactToCollision = function(collidedObject){
         switch (collidedObject.name) {
             case "ElectricField":
-                    // console.log(global.isActive);
+                    console.log(collidedObject.isActive);
                     const distance = Math.sqrt(
                         (this.x - collidedObject.x) ** 2 + (this.y - collidedObject.y) ** 2
                     );
@@ -98,7 +98,7 @@ class Enemy extends BaseGameObject {
 
                 break;
             case "Player":
-                collidedObject.health -= this.damage * global.deltaTime;
+                collidedObject.health -= (this.damage * global.deltaTime) / 2;
                 break;
             default:
                 // do nothing

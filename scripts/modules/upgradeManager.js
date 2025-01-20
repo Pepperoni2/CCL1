@@ -14,7 +14,7 @@ const upgrades = [
         ],
         progress: 0,
         maxProgress: 5,
-        imagePath: "../assets/images/level-up.png",
+        imagePath: "../assets/images/electricField.png",
         equipWeapon: function(){
             global.playerObject.weapons.push({
                 name: "ElectricField",
@@ -82,7 +82,7 @@ const upgrades = [
         ],
         progress: 1,  // progress 1 because the player starts with the pistol, currently there is no plan on choosing which weapon you can equip from the start so this should be fine
         maxProgress: 4,
-        imagePath: "../assets/images/level-up.png",
+        imagePath: ["../assets/images/pistol_upgrade_1.png","../assets/images/pistol_upgrade_2.png"],
         upgrade: function(){
             const index = Object.keys(global.playerObject.weapons).find(key => global.playerObject.weapons[key].name === "pistol");
             this.progress++;
@@ -116,7 +116,7 @@ const upgrades = [
         ],
         progress: 0,
         maxProgress: 3,
-        imagePath: "../assets/images/level-up.png",
+        imagePath: "../assets/images/movement_speed.png",
         upgrade: function(){
             this.progress++;
             global.playerObject.movementSpeed += global.playerObject.movementSpeed * 0.15; // increase movementSpeed by 15%
@@ -133,7 +133,7 @@ const upgrades = [
         ],
         progress: 0,    
         maxProgress: 4,
-        imagePath: "../assets/images/level-up.png",
+        imagePath: "../assets/images/damage_boost.png",
         upgrade: function(){
             switch(this.progress){
                 case 0:
@@ -159,7 +159,7 @@ const upgrades = [
     {
         title: "Health Regeneration",
         description:[
-            "Increases your health regeneration by 1.0 per second",
+            "Increases your health regeneration by 1.0 per second", 
             "Increases your health regeneration by 1.0 per second",
             "Increases your health regeneration by 1.0 per second",
             "Increases your health regeneration by 1.0 per second",
@@ -168,7 +168,7 @@ const upgrades = [
         ],
         progress: 0,
         maxProgress: 5,
-        imagePath: "../assets/images/level-up.png",
+        imagePath: "../assets/images/HealthRegeneration.png",
         upgrade: function(){
             this.progress++;
             global.playerObject.healthRegeneration += 1; // increase health regeneration by 1
@@ -193,7 +193,7 @@ function displayUpgradeCards(){
             card.classList.add("card");
             card.innerHTML = `
             <div class="upperContainer">
-            <div class="cardImage"><img src="${upgrade.imagePath}" alt="Upgrade Image"></div>
+            <div class="cardImage"><img src="${upgrade.title === 'Pistol' && upgrade.progress >= 2 ? upgrade.imagePath[1] : upgrade.title === 'Pistol' && upgrade.progress < 2 ? upgrade.imagePath[0] : upgrade.imagePath}" alt="Upgrade Image"></div>
             <div class="titleProgressContainer">
             <h3 class="cardTitle">${upgrade.title}</h3>
             <div class="progress-bar-${counter}"></div>

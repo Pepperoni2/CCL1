@@ -49,6 +49,7 @@ function setupGame() {
     global.seconds = 0;
     global.score = 0;
     global.gameOver = false;
+    global.newMusic = false;
     global.startTime = Date.now();
     global.playerObject = new Character(600, 330, 60, 60);
     global.spawnRate = 2000; // 2 seconds

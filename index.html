@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misty Survivor's</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" href="./images/logo.jpg"> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misty Survivor's</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- <link rel="icon" href="./images/logo.jpg"> -->
 </head>
+
 <body>
+  <div id="start-page">
+    <h1 class="game-title" style="color:whitesmoke">Misty Survivor's<br>-<br>Endless Struggle</h1>
+    <div class="menu">
+      <button id="start-button" class="menu-button">Start Game</button>
+      <!-- <button id="settings-button" class="menu-button">Settings</button> -->
+      <button id="instructions-button" class="menu-button">Instructions</button>
+    </div>
+  </div>
+  <div id="gamePage" style="display: none;">
     <!-- further HTML elements, that should maybe be displayed above your game. E.g. Healtbar, .... -->
     <div id="experienceBar">
       <div id="experienceBarFill"></div>
-        <div id="level">LV. <span id="levelNumber"></span></div>
+      <div id="level">LV. <span id="levelNumber"></span></div>
     </div>
-    <div id="kills">0</div>
-    <div id="time">0:00
+    <div class="statContainer">
+      <div id="kills"><img src="assets/images/KillScore.png" alt="KillScore"><span id="killCount">0</span></div>
+      <div id="time">0:00</div>
     </div>
     <div id="upgradeScreen">
       <div id="cards">
         <!-- <h1 id="card1Title">Upgrade</h1>
-        <img src="./images/level-up.png" width="50px" height="50px" alt="">
-        <p id="card1Description">Lorem ipsum dolor sit amet,</p> -->
+    <img src="./images/level-up.png" width="50px" height="50px" alt="">
+    <p id="card1Description">Lorem ipsum dolor sit amet,</p> -->
       </div>
       <!-- <div id="card2">
-        <h1 id="card2Title">Upgrade</h1>
-        <img src="./images/level-up.png" width="50px" height="50px" alt="">
-        <p id="card2Description">Lorem ipsum dolor sit amet,</p>
-      </div> -->
+    <h1 id="card2Title">Upgrade</h1>
+    <img src="./images/level-up.png" width="50px" height="50px" alt="">
+    <p id="card2Description">Lorem ipsum dolor sit amet,</p>
+  </div> -->
     </div>
     <div id="PauseScreen">
-        <div>Game Paused!</div>
-        <div>Press "ESC" to resume</div>
+      <div>Game Paused!</div>
+      <div>Press "ESC" to resume</div>
     </div>
-    
+
     <div id="gameOverScreen">
       <div id="gameOverText">Game Over</div>
       <div id="gameOverScore">Score: <span id="finalScore">0</span></div>
@@ -42,18 +54,23 @@
     <div id="gameContainer">
       <!-- further HTML elements, that should be behind your game. e.g. Background image, .... -->
       <!-- <div id="background"></div> -->
-      <canvas id="gameCanvas" width="1280" height="720"></canvas> <!-- change the size attributes of your canvas according to your game -->
+      <canvas id="gameCanvas" width="1280" height="720"></canvas>
+      <!-- change the size attributes of your canvas according to your game -->
       <!-- further HTML elements, that should overlay your game. e.g. Main Screen, Game Over screen, .... -->
       <!-- <div id="gameOverScreen"></div> -->
       <!-- <div id="mainScreen"></div> -->
     </div>
-    <!-- further HTML elements, that should maybe be displayed below your game. E.g. Score, .... -->
-    <!-- <div id="scoreDisplay">Score: </div> -->   
-  
-    <script type="module" src="./scripts/modules/global.js"></script>
-    <script type="module" src="./scripts/modules/input.js"></script>
-    <script type="module" src="./scripts/modules/main.js"></script>
-    
-  </body>
-  </html>
+  </div>
+
+  <!-- further HTML elements, that should maybe be displayed below your game. E.g. Score, .... -->
+  <!-- <div id="scoreDisplay">Score: </div> -->
+
+  <script type="module" src="./scripts/modules/global.js"></script>
+  <script type="module" src="./scripts/modules/input.js"></script>
+  <script type="module" src="./scripts/modules/main.js"></script>
+
+</body>
+
+</html>
+
 </html>

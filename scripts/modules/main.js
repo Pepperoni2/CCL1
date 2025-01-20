@@ -74,10 +74,11 @@ function setupGame() {
             }
         }
     }, global.spawnRate);
+    global.music.loadSound('phase1', '../assets/sounds/MOL_Violation.mp3', true);
+    global.music.playMusic();
     animationFrameId = requestAnimationFrame(gameLoop);
 }
-setupGame();
-animationFrameId = requestAnimationFrame(gameLoop);
+
 /* this is a fix that makes your game still runable after you left the tab/browser for some time: */
 document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
@@ -85,15 +86,19 @@ document.addEventListener("visibilitychange", () => {
     } 
 });
 
+
+
 document.addEventListener("keydown", (event) => {
     if(event.key == "Escape"){
         if(global.gameIsPaused){
             global.gameIsPaused = false;
             document.querySelector('#PauseScreen').style.display = "none";
+            global.music.playMusic();
         }
         else{
             global.gameIsPaused = true;
             document.querySelector('#PauseScreen').style.display = "flex";
+            global.music.pauseMusic();
         }
     }
     if(!global.playerObject.active && event.key === "Enter"){
@@ -101,6 +106,40 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+
+// Get elements
+const startPage = document.querySelector('#start-page');
+const gameContainer = document.querySelector('#gameContainer');
+const settingsPage = document.querySelector('#settings-page');
+
+const startButton = document.querySelector('#start-button');
+const settingsButton = document.querySelector('#settings-button');
+const instructionsButton = document.querySelector('#instructions-button');
+
+const gamePage = document.querySelector('#gamePage');
+
+// Start game button
+startButton.addEventListener('click', () => {
+  startPage.style.display = 'none';
+  gamePage.style.display = 'block';
+  // Call your game initialization logic here
+  setupGame();
+  animationFrameId = requestAnimationFrame(gameLoop);
+});
+
+// Settings button
+// settingsButton.addEventListener('click', () => {
+//   startPage.style.display = 'none';
+//   settingsPage.style.display = 'flex';
+// });
+
+// Instructions button
+instructionsButton.addEventListener('click', () => {
+  alert('Instructions: Use WASD keys to move, collect XP Orbs and Level-Up your character');
+});
+
+
+// Debug mode
 window.global = global;
 
 

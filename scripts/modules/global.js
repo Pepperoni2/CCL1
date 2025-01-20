@@ -1,4 +1,5 @@
 import { Enemy } from "../gameObjects/enemy.js";
+import { SoundManager } from "./soundManager.js";
 
 const global = {};
 
@@ -18,6 +19,8 @@ global.gameIsPaused = false;
 global.seconds = 0;
 global.spawnRate = 2000;
 global.newSpawnRate = false;
+global.music = new SoundManager();
+global.newMusic = false;
 
 global.getCanvasBounds = function () {
     let bounds =  {
@@ -63,6 +66,7 @@ global.detectBoxCollision = function (gameObject1, gameObject2) {
 }
 
 global.ShowGameOverScreen = function(){
+    global.music.stopMusic();
     global.playerObject.active = false;
     // hide upgrade screen if it is open
     document.querySelector("#upgradeScreen").style.display = "none";
@@ -143,23 +147,31 @@ global.spawnEnemy = function(){
         new Enemy(randomX, randomY, 60, 60, 15, 40, 20, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 240 && global.seconds <= 300){ // 4-5 min
+        if(!global.newMusic){
+            global.music.stopMusic();
+            global.music.backgroundMusic = null;
+            global.music.loadSound("phase2", "../assets/sounds/MOL_HighAlert.mp3", true);
+            global.music.playMusic();
+            global.newMusic = true;
+        }
         new Enemy(randomX, randomY, 60, 60, 15, 45, 25, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 300 && global.seconds <= 420){ // 5-7 min
-        new Enemy(randomX, randomY, 60, 60, 15, 45, 35, "../assets/sprites/Enemy_2.png");
+        new Enemy(randomX, randomY, 60, 60, 15, 45, 40, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 420 && global.seconds <= 480){ // 7-8 min
-        new Enemy(randomX, randomY, 60, 60, 20, 45, 40, "../assets/sprites/Enemy_3.png");
+        new Enemy(randomX, randomY, 60, 60, 20, 45, 55, "../assets/sprites/Enemy_3.png");
     }
     else if(global.seconds >= 480 && global.seconds <= 600){ // 8-10 min
-        new Enemy(randomX, randomY, 60, 60, 20, 50, 40, "../assets/sprites/Enemy_3.png");
+        new Enemy(randomX, randomY, 60, 60, 20, 50, 70, "../assets/sprites/Enemy_3.png");
     } 
     else{       // > 10 min
-        new Enemy(randomX, randomY, 60, 60, 25, 65, 50, "../assets/sprites/Enemy_3.png");
+        new Enemy(randomX, randomY, 60, 60, 25, 65, 100, "../assets/sprites/Enemy_3.png");
     }
     
 }
 global.updateUI = function(){
+    document.querySelector("#killCount").innerText = global.score;
     global.updateExperienceBar();
 }
 global.updateTime = function(){

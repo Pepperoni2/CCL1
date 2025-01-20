@@ -43,9 +43,10 @@ class Enemy extends BaseGameObject {
         }
 
         if(this.health <= 0){
-            global.score += 1;
+            if(this.active) global.score++;
             this.active = false;
             Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp) : null;  
+            
         }
     }
     draw = function(){
@@ -55,8 +56,8 @@ class Enemy extends BaseGameObject {
         global.ctx.drawImage(sprite, this.x, this.y, this.width, this.height);
         
         // Draw damage numbers
-        global.ctx.fillStyle = "black";
-        global.ctx.font = "bold 20px MegaMaxJonathanToo";
+        global.ctx.fillStyle = "red";
+        global.ctx.font = "bold 26px MegaMaxJonathanToo";
         for (let dn of this.damageNumbers) {
             global.ctx.fillText(dn.value, dn.x, dn.y);
         }
@@ -64,7 +65,7 @@ class Enemy extends BaseGameObject {
     reactToCollision = function(collidedObject){
         switch (collidedObject.name) {
             case "ElectricField":
-                    console.log(collidedObject.isActive);
+                    // console.log(collidedObject.isActive);
                     const distance = Math.sqrt(
                         (this.x - collidedObject.x) ** 2 + (this.y - collidedObject.y) ** 2
                     );

@@ -56,7 +56,7 @@ class Enemy extends BaseGameObject {
         
         // Draw damage numbers
         global.ctx.fillStyle = "black";
-        global.ctx.font = "bold 20px Arial";
+        global.ctx.font = "bold 20px MegaMaxJonathanToo";
         for (let dn of this.damageNumbers) {
             global.ctx.fillText(dn.value, dn.x, dn.y);
         }

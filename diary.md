@@ -63,3 +63,10 @@ dynamic enemy scaling, upgrademenu styling, remade timer;
 19.01.2025
 adjusted enemy scaling and spawn rate
 added new sprites and loading sprites into game
+
+
+21.01.2025
+added circular hit detection to the electric field
+balancing enemy stats, added some new backgrounds and music
+new phase 4 enemy added
+Tomorrow: add new upgrades, start to draw playable character

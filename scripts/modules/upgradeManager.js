@@ -76,8 +76,8 @@ const upgrades = [
         description: [
             "",
             "Increase Base damage by 10%",
-            "Increase Base damage by 10% - Projectile + 1",
-            "Increase Base damage by 10%",
+            "Increase Base damage by 20% - Projectile + 1",
+            "Increase Base damage by 30%",
             "Projectile + 1",
         ],
         progress: 1,  // progress 1 because the player starts with the pistol, currently there is no plan on choosing which weapon you can equip from the start so this should be fine
@@ -91,11 +91,11 @@ const upgrades = [
                     global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 10%
                     break;
                 case 3:
-                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 20%
+                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.2; // increase Base damage by 20%
                     global.playerObject.weapons[index].projectileCount += 1;
                     break;
                 case 4:
-                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1; // increase Base damage by 30%
+                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.3; // increase Base damage by 30%
                     break;
                 case 5:
                     global.playerObject.weapons[index].projectileCount += 1;

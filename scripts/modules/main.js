@@ -62,11 +62,12 @@ function resetGame() {
     global.newSpawnRate = false;
     global.music = new SoundManager();
     global.newMusic = false;
+    global.lastDamageTime = 0;
 }
 
 function setupGame() {
     resetGame();
-    global.playerObject = new Character(600, 330, 60, 60);
+    global.playerObject = new Character(610, 330, 60, 60);
     global.spawnRate = 2000; // 2 seconds
     const timer = setInterval(() => {
         if(!global.gameIsPaused){

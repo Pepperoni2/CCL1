@@ -4,7 +4,7 @@ import { BaseGameObject } from "../baseGameObject.js";
 class ElectricField extends BaseGameObject{
     name = "ElectricField"
     radius = 50;              // Radius of the AOE attack
-    damage = 30;              // Base damage dealt to enemies
+    damage = 30;              // Base damage dealt to enemies is set by weapon.baseDamage in upgradeManager.js
     duration = 0.5;           // Duration of the AOE in seconds
     cooldown = 1;             // Cooldown time in seconds
     isAvailable = true;       // Whether the AOE is ready to use

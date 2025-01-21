@@ -66,20 +66,23 @@ class Enemy extends BaseGameObject {
         switch (collidedObject.name) {
             case "ElectricField":
                 if (collidedObject.isActive) {
+                    const currentTime = Date.now();
                     const dx = this.x + this.width / 2 - (collidedObject.x + collidedObject.radius);
                     const dy = this.y + this.height / 2 - (collidedObject.y + collidedObject.radius);
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance <= collidedObject.radius + 10) {  // + 10 offset
-                        this.health -= collidedObject.damage * global.deltaTime; 
-
-                        // Display damage numbers
-                        this.damageNumbers.push({
-                            value: `${parseFloat(collidedObject.damage * global.deltaTime).toFixed(0)}`,
-                            x: this.x + this.width / 2,
-                            y: this.y - 10,
-                            time: 1 
-                        });
+                        // if(currentTime - global.lastDamageTime >= 1000) {
+                            this.health -= collidedObject.damage * global.deltaTime;
+                            global.lastDamageTime = currentTime; // Update the last damage time
+                            // Display damage numbers
+                            this.damageNumbers.push({
+                                value: `${collidedObject.damage}`,
+                                x: this.x + this.width / 2,
+                                y: this.y - 10,
+                                time: 1
+                            });
+                        // }
                     }
                 }
                 break;

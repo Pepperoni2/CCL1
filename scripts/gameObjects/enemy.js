@@ -65,25 +65,23 @@ class Enemy extends BaseGameObject {
     reactToCollision = function(collidedObject){
         switch (collidedObject.name) {
             case "ElectricField":
-                    // console.log(collidedObject.isActive);
-                    const distance = Math.sqrt(
-                        (this.x - collidedObject.x) ** 2 + (this.y - collidedObject.y) ** 2
-                    );
-                    // console.log(distance);
-                    // console.log(collidedObject.radius)
-                    if ((distance <= collidedObject.radius) && collidedObject.isActive) {
-                        this.health -= collidedObject.damage * global.deltaTime;
-                        // console.log("Enemy has received" + collidedObject.damage);
-                        // this.damageNumbers.push({
-                        //     value: `${parseFloat(collidedObject.damage * global.deltaTime).toFixed(0)}`,  // Text to display
-                        //     x: this.x + this.width / 2,         // Start at the enemy's center
-                        //     y: this.y - 10,                     // Slightly above the enemy
-                        //     time: 1                           // Duration (1 second)
-                        // });
-                        // console.log(
-                        //     `Enemy at (${this.x}, ${this.y}) took ${collidedObject.damage} damage! Remaining health: ${this.health}`
-                        // );
+                if (collidedObject.isActive) {
+                    const dx = this.x + this.width / 2 - (collidedObject.x + collidedObject.radius);
+                    const dy = this.y + this.height / 2 - (collidedObject.y + collidedObject.radius);
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance <= collidedObject.radius + 10) {  // + 10 offset
+                        this.health -= collidedObject.damage * global.deltaTime; 
+
+                        // Display damage numbers
+                        this.damageNumbers.push({
+                            value: `${parseFloat(collidedObject.damage * global.deltaTime).toFixed(0)}`,
+                            x: this.x + this.width / 2,
+                            y: this.y - 10,
+                            time: 1 
+                        });
                     }
+                }
                 break;
             case "Projectile":
                 collidedObject.active = false;

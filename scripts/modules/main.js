@@ -1,6 +1,7 @@
 import { global } from "./global.js";
 import { Character } from "../gameObjects/character.js";
 import { upgrades } from "./upgradeManager.js";
+import { SoundManager } from "./soundManager.js";
 
 let animationFrameId;
 
@@ -35,8 +36,7 @@ function gameLoop(totalRunningTime) {
 
 }
 
-
-function setupGame() {
+function resetGame() {
     document.querySelector("#gameOverScreen").style.display = "none";
     document.querySelector("#experienceBarFill").style.width = "0%";
     document.querySelector('#time').innerText = '0:00'; 
@@ -46,11 +46,26 @@ function setupGame() {
         else upgrades[i].progress = 0;
     }
     global.allGameObjects = [];
-    global.seconds = 0;
-    global.score = 0;
-    global.gameOver = false;
     global.newMusic = false;
     global.startTime = Date.now();
+    global.allGameObjects = [];
+    global.playerObject = {};
+    global.score = 0;
+    global.gameTime = 0;
+    global.gameOver = false;
+    global.keysPressed = {};
+    global.IsupgradeSceneActive = false;
+    global.applyFieldUpgrade = false;
+    global.gameIsPaused = false;
+    global.seconds = 0;
+    global.spawnRate = 2000;
+    global.newSpawnRate = false;
+    global.music = new SoundManager();
+    global.newMusic = false;
+}
+
+function setupGame() {
+    resetGame();
     global.playerObject = new Character(600, 330, 60, 60);
     global.spawnRate = 2000; // 2 seconds
     const timer = setInterval(() => {

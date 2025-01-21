@@ -29,7 +29,7 @@ body{
 } */
 
 #gameCanvas{
-    background-image: url("../assets/images/Background_1.png");
+    /* background-image: url("../assets/images/Background_1.png"); */
     background-size: cover;
     background-color: rgb(60, 148, 60);
     border: 1px solid white;

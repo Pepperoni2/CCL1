@@ -11,6 +11,7 @@ class Enemy extends BaseGameObject {
         this.speed = speed; // 30
         this.damageNumbers = []; // Array to store damage numbers
         this.exp = exp
+        this.lastDamageTime = 0;
         global.allGameObjects.push(this)
         this.loadImages([spritePath]);
         
@@ -66,7 +67,6 @@ class Enemy extends BaseGameObject {
         switch (collidedObject.name) {
             case "ElectricField":
                 if (collidedObject.isActive) {
-                    const currentTime = Date.now();
                     const dx = this.x + this.width / 2 - (collidedObject.x + collidedObject.radius);
                     const dy = this.y + this.height / 2 - (collidedObject.y + collidedObject.radius);
                     const distance = Math.sqrt(dx * dx + dy * dy);
@@ -74,14 +74,8 @@ class Enemy extends BaseGameObject {
                     if (distance <= collidedObject.radius + 10) {  // + 10 offset
                         // if(currentTime - global.lastDamageTime >= 1000) {
                             this.health -= collidedObject.damage * global.deltaTime;
-                            global.lastDamageTime = currentTime; // Update the last damage time
                             // Display damage numbers
-                            this.damageNumbers.push({
-                                value: `${collidedObject.damage}`,
-                                x: this.x + this.width / 2,
-                                y: this.y - 10,
-                                time: 1
-                            });
+                            this.displayDamageNumbers(collidedObject);
                         // }
                     }
                 }
@@ -108,6 +102,24 @@ class Enemy extends BaseGameObject {
         }
 
     }
+    // Function to execute the code
+    displayDamageNumbers = function(collidedObject) {
+    const currentTime = Date.now(); // Current time in milliseconds
+
+    // Check if 0.3 seconds have passed since the last execution
+    if (currentTime - this.lastDamageTime >= 500) {
+        // Update the last execution time
+        this.lastDamageTime = currentTime;
+
+        // Execute your damage number logic
+        this.damageNumbers.push({
+            value: `${collidedObject.damage}`,
+            x: this.x + this.width / 2,
+            y: this.y - 10,
+            time: 0.5
+        });
+    }
+}
 }
 
 export { Enemy }

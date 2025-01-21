@@ -148,6 +148,7 @@ global.spawnEnemy = function(){
     }
     else if(global.seconds >= 240 && global.seconds <= 300){ // 4-5 min
         if(!global.newMusic){
+            document.querySelector('#gameCanvas').style.backgroundImage = "url('../assets/images/Background_2.png'"; 
             global.music.stopMusic();
             global.music.backgroundMusic = null;
             global.music.loadSound("phase2", "../assets/sounds/MOL_HighAlert.mp3", true);
@@ -160,12 +161,28 @@ global.spawnEnemy = function(){
         new Enemy(randomX, randomY, 60, 60, 20, 45, 50, "../assets/sprites/Enemy_3.png");
     }
     else if(global.seconds >= 420 && global.seconds <= 480){ // 7-8 min
+        if(global.newMusic){
+            document.querySelector('#gameCanvas').style.backgroundImage = "url('../assets/images/Background_3.png'"; 
+            global.newMusic = false;
+        }
         new Enemy(randomX, randomY, 60, 60, 30, 45, 60, "../assets/sprites/Enemy_3.png");
     }
     else if(global.seconds >= 480 && global.seconds <= 600){ // 8-10 min
+        if(!global.newMusic){
+            document.querySelector('#gameCanvas').style.backgroundImage = "url('../assets/images/Background_4.png'"; 
+            global.newMusic = true;
+        }
         new Enemy(randomX, randomY, 60, 60, 40, 50, 80, "../assets/sprites/Enemy_3.png");
     } 
     else if(global.seconds > 600 && global.seconds <= 900){       // 10-15 min
+        if(global.newMusic){
+            document.querySelector('#gameCanvas').style.backgroundImage = "url('../assets/images/Chalamity.png'"; 
+            global.music.stopMusic();
+            global.music.backgroundMusic = null;
+            global.music.loadSound("phase2", "../assets/sounds/TheMistyEye_OtherwordlyChalamity.mp3", true);
+            global.music.playMusic();
+            global.newMusic = false;
+        }
         new Enemy(randomX, randomY, 60, 60, 50, 65, 100, "../assets/sprites/Enemy_4.png");
     }
     else{ // 15+ min 

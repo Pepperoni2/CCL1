@@ -28,6 +28,7 @@ function gameLoop(totalRunningTime) {
         // Deletes all objects that are not active
         global.allGameObjects.forEach(obj => obj.update()); // Update all game objects
         global.allGameObjects.forEach(obj => obj.draw()); // Draw all game objects
+        global.playerObject.draw();
         global.allGameObjects.forEach(obj => global.checkCollisionWithAnyOther(obj)); // Check for collisions between all game objects
         // console.log(global.allGameObjects);            
         global.updateUI(); // Update the experience bar of the player
@@ -39,7 +40,8 @@ function gameLoop(totalRunningTime) {
 function resetGame() {
     document.querySelector("#gameOverScreen").style.display = "none";
     document.querySelector("#experienceBarFill").style.width = "0%";
-    document.querySelector('#time').innerText = '0:00'; 
+    document.querySelector('#time').innerText = '0:00';
+    document.querySelector('#gameCanvas').style.backgroundImage = "url('../assets/images/Background_1.png'"; 
     for (let i = 0; i < upgrades.length; i++) {
          // sets progress to 1 
         if(upgrades[i].title === "Pistol") upgrades[i].progress = 1;

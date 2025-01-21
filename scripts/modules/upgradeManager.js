@@ -18,7 +18,7 @@ const upgrades = [
         equipWeapon: function(){
             global.playerObject.weapons.push({
                 name: "ElectricField",
-                baseDamage: 50,
+                baseDamage: 5,
                 radius: 100,
                 duration: 1,
                 cooldown: 5, 

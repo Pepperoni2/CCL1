@@ -32,7 +32,6 @@ function gameLoop(totalRunningTime) {
         global.allGameObjects.forEach(obj => global.checkCollisionWithAnyOther(obj)); // Check for collisions between all game objects
         // console.log(global.allGameObjects);            
         global.updateUI(); // Update the experience bar of the player
-        console.log(global.spawnRate);
     }
     animationFrameId = requestAnimationFrame(gameLoop); // This keeps the gameLoop running indefinitely
 

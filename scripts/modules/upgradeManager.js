@@ -9,7 +9,7 @@ const upgrades = [
             "Increase Radius of Elecric Field - duration = 1s",
             "Increase Radius of Elecric Field - cooldown reduced to 4.5s - baseDamage +10%",
             "Increase Radius  of Elecric Field - Basedamage +20%, - cooldown reduced to 3s",
-            "Cooldown reduced to 2s - Basedamage + 10%",
+            "Cooldown reduced to 2s - Basedamage + 20%",
             "The Electric Field is constantly active! - Basedamage +30%",
         ],
         progress: 0,
@@ -50,13 +50,13 @@ const upgrades = [
                         // Increase the radius by 20 px
                         global.playerObject.weapons[index].radius += 20;
                         // Increase baseDamage by 10%
-                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.2;
                         // Cooldown reduced to
                         global.playerObject.weapons[index].cooldown = 3.0;
                         break;
                     case 4: 
                         global.playerObject.weapons[index].cooldown = 2.0;
-                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.2;
                         break;
                     case 5:
                         global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.3;
@@ -79,7 +79,7 @@ const upgrades = [
             "Increase Base damage by 10%",
             "Increase Base damage by 20% - Projectile + 1",
             "Increase Base damage by 30%",
-            "Projectile + 1",
+            "Projectile + 1 - Increase Basedamage by 50%",
         ],
         progress: 1,  // progress 1 because the player starts with the pistol, currently there is no plan on choosing which weapon you can equip from the start so this should be fine
         maxProgress: 4,
@@ -100,6 +100,7 @@ const upgrades = [
                     break;
                 case 5:
                     global.playerObject.weapons[index].projectileCount += 1;
+                    global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.5; // increase Base damage by 50%
                     break;
                 default:
                     // do nothing

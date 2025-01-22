@@ -140,12 +140,10 @@ global.spawnEnemy = function(){
         new Enemy(randomX, randomY, 60, 60, 10, 30, 10, "../assets/sprites/Enemy.png");
     }
     else if(global.seconds >= 60 && global.seconds <= 120){ // 1-2 minutes
-        global.newSpawnRate = true;
-        global.spawnRate = 1800;
-        new Enemy(randomX, randomY, 60, 60, 10, 35, 15, "../assets/sprites/Enemy.png");
+        new Enemy(randomX, randomY, 60, 60, 10, 30, 15, "../assets/sprites/Enemy.png");
     }
     else if(global.seconds >= 120 && global.seconds <= 240){ // 2-4 min
-        new Enemy(randomX, randomY, 60, 60, 15, 40, 20, "../assets/sprites/Enemy_2.png");
+        new Enemy(randomX, randomY, 60, 60, 15, 30, 20, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 240 && global.seconds <= 300){ // 4-5 min
         if(!global.newMusic){
@@ -156,24 +154,24 @@ global.spawnEnemy = function(){
             global.music.playMusic();
             global.newMusic = true;
         }
-        new Enemy(randomX, randomY, 60, 60, 15, 45, 25, "../assets/sprites/Enemy_2.png");
+        new Enemy(randomX, randomY, 60, 60, 15, 35, 35, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 300 && global.seconds <= 420){ // 5-7 min
-        new Enemy(randomX, randomY, 60, 60, 20, 45, 50, "../assets/sprites/Enemy_3.png");
+        new Enemy(randomX, randomY, 60, 60, 20, 35, 50, "../assets/sprites/Enemy_2.png");
     }
     else if(global.seconds >= 420 && global.seconds <= 480){ // 7-8 min
         if(global.newMusic){
             document.querySelector('#gameCanvas').style.backgroundImage = "url('../assets/images/Background_3.png'"; 
             global.newMusic = false;
         }
-        new Enemy(randomX, randomY, 60, 60, 30, 45, 60, "../assets/sprites/Enemy_3.png");
+        new Enemy(randomX, randomY, 60, 60, 30, 35, 60, "../assets/sprites/Enemy_3.png");
     }
     else if(global.seconds >= 480 && global.seconds <= 600){ // 8-10 min
         if(!global.newMusic){
             document.querySelector('#gameCanvas').style.backgroundImage = "url('../assets/images/Background_4.png'"; 
             global.newMusic = true;
         }
-        new Enemy(randomX, randomY, 60, 60, 40, 50, 80, "../assets/sprites/Enemy_3.png");
+        new Enemy(randomX, randomY, 60, 60, 40, 40, 80, "../assets/sprites/Enemy_3.png");
     } 
     else if(global.seconds > 600 && global.seconds <= 900){       // 10-15 min
         if(global.newMusic){
@@ -184,10 +182,10 @@ global.spawnEnemy = function(){
             global.music.playMusic();
             global.newMusic = false;
         }
-        new Enemy(randomX, randomY, 60, 60, 50, 65, 100, "../assets/sprites/Enemy_4.png");
+        new Enemy(randomX, randomY, 60, 60, 50, 45, 100, "../assets/sprites/Enemy_4.png");
     }
     else{ // 15+ min 
-        new Enemy(randomX, randomY, 60, 60, 200, 150, 200, "../assets/sprites/Enemy_4.png");
+        new Enemy(randomX, randomY, 60, 60, 100, 70, 200, "../assets/sprites/Enemy_4.png");
     }
     
 }

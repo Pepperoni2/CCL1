@@ -129,9 +129,11 @@ class Character extends BaseGameObject {
     reactToCollision = function (collidingObject) {
         switch (collidingObject.name) {
             case "ExpObject":
-                collidingObject.active = false;
-                this.experience += collidingObject.exp * global.playerObject.expModifier;
-                this.experienceForNextLevel = this.calculatedExperienceThreshold();
+                if (collidingObject.active) {
+                    collidingObject.active = false;
+                    this.experience += collidingObject.exp * global.playerObject.expModifier;
+                    this.experienceForNextLevel = this.calculatedExperienceThreshold();
+                }
                 break;
             default:
                 // do nothing

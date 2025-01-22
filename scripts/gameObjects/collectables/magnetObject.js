@@ -12,8 +12,10 @@ class Magnet extends BaseGameObject
     }
 
     reactToCollision = function(collidedObject){
-        if(collidedObject.name === "Player"){
+        if(collidedObject.name === "Player" && this.active){
+            this.active;
             this.collectAllXP();
+            global.magnetCount--;
         }
     }
 

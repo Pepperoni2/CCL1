@@ -44,11 +44,18 @@ class Enemy extends BaseGameObject {
             dn.time -= global.deltaTime; // Decrease its visibility duration
         }
 
-        if(this.health <= 0){
-            if(this.active) global.score++;
+        if (this.health <= 0 && this.active) {
             this.active = false;
-            // Drop exp object 90% of the time, magnet 10% of the time
-            Math.random() > 0.1 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp) ? Math.random() < 0.05 ? new Magnet(this.x + this.width / 2, this.y + this.height / 2, 30, 30) : null: null: null; 
+            global.score++;
+            // Drop exp object 95% of the time, magnet 5% of the time
+            console.log(global.magnetCount)
+            if (Math.random() > 0.05) {
+                new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp)
+            }
+            else if (global.magnetCount < 2) {
+                new Magnet(this.x + this.width / 2, this.y + this.height / 2, 30, 30)
+                global.magnetCount++;
+            }
         }
     }
     draw = function(){

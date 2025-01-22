@@ -1,4 +1,3 @@
-import { global } from "./global.js";
 
 class SoundManager {
     constructor() {

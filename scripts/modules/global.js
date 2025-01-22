@@ -22,6 +22,7 @@ global.newSpawnRate = false;
 global.music = new SoundManager();
 global.newMusic = false;
 global.lastDamageTime = 0;
+global.magnetCount = 0;
 
 global.getCanvasBounds = function () {
     let bounds =  {

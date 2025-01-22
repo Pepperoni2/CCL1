@@ -1,6 +1,7 @@
 import { global } from "../modules/global.js";
 import { BaseGameObject } from "./baseGameObject.js";
 import { ExpObject } from "./collectables/expObject.js";
+import { Magnet } from "./collectables/magnetObject.js";
 
 class Enemy extends BaseGameObject {
     constructor(x, y, width, height, health, speed, exp, spritePath) {
@@ -46,8 +47,8 @@ class Enemy extends BaseGameObject {
         if(this.health <= 0){
             if(this.active) global.score++;
             this.active = false;
-            Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp) : null;  
-            
+            // Drop exp object 80% of the time, magnet 5% of the time, 15% nothing
+            Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp) ? Math.random() > 0.95 ? new Magnet(this.x + this.width / 2, this.y + this.height / 2, 30, 30) : null: null: null; 
         }
     }
     draw = function(){
@@ -113,7 +114,7 @@ class Enemy extends BaseGameObject {
 
         // Execute your damage number logic
         this.damageNumbers.push({
-            value: `${collidedObject.damage}`,
+            value: `${parseFloat(collidedObject.damage).toFixed(0)}`,
             x: this.x + this.width / 2,
             y: this.y - 10,
             time: 0.5

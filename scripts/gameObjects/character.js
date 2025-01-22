@@ -24,6 +24,7 @@ class Character extends BaseGameObject {
     lastShotTime = 0;
     experienceForNextLevel;
     dmgModifier = 1.0; // Damage modifier on every equipped weapon
+    expModifier = 1.0; // Experience modifier
 
     constructor(x, y, width, height) {
         super(x, y, width, height);

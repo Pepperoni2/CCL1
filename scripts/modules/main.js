@@ -95,6 +95,7 @@ function setupGame() {
     }, global.spawnRate);
     global.music.loadSound('phase1', '../assets/sounds/MOL_Violation.mp3', true);
     global.music.playMusic();
+    global.music.setVolume(0.5);
     animationFrameId = requestAnimationFrame(gameLoop);
 }
 

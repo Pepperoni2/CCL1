@@ -8,8 +8,8 @@ const upgrades = [
             "An Electric Field appears around you - duration = 0.5s, cooldown = 5s",
             "Increase Radius of Elecric Field - duration = 1s",
             "Increase Radius of Elecric Field - cooldown reduced to 4.5s - baseDamage +10%",
-            "Increase Radius  of Elecric Field - Basedamage +10%, - cooldown reduced to 3s",
-            "Cooldown reduced to 2s",
+            "Increase Radius  of Elecric Field - Basedamage +20%, - cooldown reduced to 3s",
+            "Cooldown reduced to 2s - Basedamage + 10%",
             "The Electric Field is constantly active! - Basedamage +30%",
         ],
         progress: 0,
@@ -18,7 +18,7 @@ const upgrades = [
         equipWeapon: function(){
             global.playerObject.weapons.push({
                 name: "ElectricField",
-                baseDamage: 5,
+                baseDamage: 3,
                 radius: 100,
                 duration: 1,
                 cooldown: 5, 
@@ -56,6 +56,7 @@ const upgrades = [
                         break;
                     case 4: 
                         global.playerObject.weapons[index].cooldown = 2.0;
+                        global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.1;
                         break;
                     case 5:
                         global.playerObject.weapons[index].baseDamage += global.playerObject.weapons[index].baseDamage * 0.3;
@@ -127,8 +128,8 @@ const upgrades = [
         description: [
             "Increases the damage of the player by 20%",
             "Increases the damage of the player by 20%",
-            "Increases the damage of the player by 20%",
             "Increases the damage of the player by 30%",
+            "Increases the damage of the player by 40%",
             "Increases the damage of the player by 50%",
         ],
         progress: 0,    
@@ -143,7 +144,7 @@ const upgrades = [
                     global.playerObject.dmgModifier += 0.2;  // increase damage by 20%
                     break;
                 case 2:
-                    global.playerObject.dmgModifier += 0.2;  // increase damage by 20%
+                    global.playerObject.dmgModifier += 0.3;  // increase damage by 20%
                     break;
                 case 3:
                     global.playerObject.dmgModifier += 0.3;  // increase damage by 30%
@@ -173,7 +174,41 @@ const upgrades = [
             this.progress++;
             global.playerObject.healthRegeneration += 1; // increase health regeneration by 1
         }
+        
     },
+    {
+        title: "Experience Boost",
+        description:[
+            "Increases the experience gained by 100%",
+            "Increases the experience gained by 100%",
+            "Increases the experience gained by 100%",
+            "Increases the experience gained by 150%",
+            "Increases the experience gained by 200%",
+        ],
+        progress: 0,
+        maxProgress: 4,
+        imagePath: "../assets/images/experience_boost.png",
+        upgrade: function(){
+            switch(this.progress){
+                case 0:
+                    global.playerObject.expModifier += 1.0; // increase experience modifier by 100%
+                    break;
+                case 1:
+                    global.playerObject.expModifier += 1.0; // increase experience modifier by 100%
+                    break;
+                case 2:
+                    global.playerObject.expModifier += 1.0; // increase experience modifier by 100%
+                    break;
+                case 3:
+                    global.playerObject.expModifier += 1.5; // increase experience modifier by 150%
+                    break;
+                case 4:
+                    global.playerObject.expModifier += 2.0; // increase experience modifier by 200%
+                    break;
+            }
+            this.progress++;
+        }
+    }
     
 
 ];

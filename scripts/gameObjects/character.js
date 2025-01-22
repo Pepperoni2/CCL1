@@ -26,9 +26,19 @@ class Character extends BaseGameObject {
     dmgModifier = 1.0; // Damage modifier on every equipped weapon
     expModifier = 1.0; // Experience modifier
 
+    animationData = {
+        "animationSprites": [], 
+        "timePerSprite": 1,
+        "currentSpriteElapsedTime": 0,
+        "firstSpriteIndex": 0,
+        "lastSpriteIndex": 1,
+        "currentSpriteIndex": 0
+    };
+
     constructor(x, y, width, height) {
         super(x, y, width, height);
         this.health = this.maxHealth;
+        this.loadImages(["../assets/sprites/character_1.png", "../assets/sprites/character_2.png"]);
         this.weapons.push({
             name: "pistol",
             baseDamage: 5,
@@ -115,8 +125,10 @@ class Character extends BaseGameObject {
     }
 
     draw = function () {
-        global.ctx.fillStyle = "blue";
-        global.ctx.fillRect(this.x, this.y, this.width, this.height);
+        let sprite = this.getNextSprite();
+        global.ctx.drawImage(sprite, this.x, this.y, this.width, this.height);
+        // global.ctx.fillStyle = "blue";
+        // global.ctx.fillRect(this.x, this.y, this.width, this.height);
         // Health bar
         global.ctx.fillStyle = "darkred";
         global.ctx.fillRect(this.x, this.y + this.height + 10, this.width * (this.health / 100), 5);

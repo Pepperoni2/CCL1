@@ -47,8 +47,7 @@ class Enemy extends BaseGameObject {
         if (this.health <= 0 && this.active) {
             this.active = false;
             global.score++;
-            // Drop exp object 95% of the time, magnet 5% of the time
-            console.log(global.magnetCount)
+            // Drop exp object 92% of the time, magnet 8% of the time
             if (Math.random() > 0.08) {
                 new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp)
             }

@@ -32,6 +32,7 @@ function gameLoop(totalRunningTime) {
         global.allGameObjects.forEach(obj => global.checkCollisionWithAnyOther(obj)); // Check for collisions between all game objects
         // console.log(global.allGameObjects);            
         global.updateUI(); // Update the experience bar of the player
+        console.log(global.spawnRate);
     }
     animationFrameId = requestAnimationFrame(gameLoop); // This keeps the gameLoop running indefinitely
 
@@ -70,7 +71,7 @@ function resetGame() {
 
 function setupGame() {
     resetGame();
-    global.playerObject = new Character(610, 330, 60, 60);
+    global.playerObject = new Character(610, 330, 36, 60);
     global.spawnRate = 2000; // 2 seconds
     const timer = setInterval(() => {
         if(!global.gameIsPaused){
@@ -96,7 +97,7 @@ function setupGame() {
     }, global.spawnRate);
     global.music.loadSound('phase1', '../assets/sounds/MOL_Violation.mp3', true);
     global.music.playMusic();
-    global.music.setVolume(0.5);
+    global.music.setVolume(0.1);
     animationFrameId = requestAnimationFrame(gameLoop);
 }
 

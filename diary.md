@@ -70,3 +70,9 @@ added circular hit detection to the electric field
 balancing enemy stats, added some new backgrounds and music
 new phase 4 enemy added
 Tomorrow: add new upgrades, start to draw playable character
+
+22.01.20225
+game balancing, implemented character sprite, added new collectable (the magnet)
+planning to add one last collectable (the medkit)
+Tomorrow: add basic sounds and title screen for the final touch
+ 

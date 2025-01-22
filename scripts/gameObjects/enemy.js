@@ -47,8 +47,8 @@ class Enemy extends BaseGameObject {
         if(this.health <= 0){
             if(this.active) global.score++;
             this.active = false;
-            // Drop exp object 80% of the time, magnet 5% of the time, 15% nothing
-            Math.random() > 0.2 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp) ? Math.random() > 0.95 ? new Magnet(this.x + this.width / 2, this.y + this.height / 2, 30, 30) : null: null: null; 
+            // Drop exp object 90% of the time, magnet 10% of the time
+            Math.random() > 0.1 ? new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp) ? Math.random() < 0.05 ? new Magnet(this.x + this.width / 2, this.y + this.height / 2, 30, 30) : null: null: null; 
         }
     }
     draw = function(){

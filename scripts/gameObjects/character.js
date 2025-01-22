@@ -130,7 +130,7 @@ class Character extends BaseGameObject {
         switch (collidingObject.name) {
             case "ExpObject":
                 collidingObject.active = false;
-                this.experience += collidingObject.exp;
+                this.experience += collidingObject.exp * global.playerObject.expModifier;
                 this.experienceForNextLevel = this.calculatedExperienceThreshold();
                 break;
             default:

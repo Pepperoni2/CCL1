@@ -186,10 +186,10 @@ global.spawnEnemy = function(){
             global.music.playMusic();
             global.newMusic = false;
         }
-        new Enemy(randomX, randomY, 60, 60, 200, 40, 100, "../assets/sprites/Enemy_4.png");
+        new Enemy(randomX, randomY, 60, 60, 100, 40, 100, "../assets/sprites/Enemy_4.png");
     }
     else{ // 15+ min 
-        new Enemy(randomX, randomY, 60, 60, 300, 50, 200, "../assets/sprites/Enemy_4.png");
+        new Enemy(randomX, randomY, 60, 60, 200, 50, 200, "../assets/sprites/Enemy_4.png");
     }
     
 }

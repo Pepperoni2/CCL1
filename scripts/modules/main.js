@@ -137,8 +137,9 @@ const settingsPage = document.querySelector('#settings-page');
 const startButton = document.querySelector('#start-button');
 const settingsButton = document.querySelector('#settings-button');
 const instructionsButton = document.querySelector('#instructions-button');
-
+const Instructions = document.querySelector('#Instructions');
 const gamePage = document.querySelector('#gamePage');
+const closeInstructions = document.querySelector('#close-instructions');
 
 // Start game button
 startButton.addEventListener('click', () => {
@@ -157,7 +158,15 @@ startButton.addEventListener('click', () => {
 
 // Instructions button
 instructionsButton.addEventListener('click', () => {
-  alert('Instructions: Use WASD keys to move, collect XP Orbs and Level-Up your character');
+//   alert('Instructions: Use WASD keys to move, collect XP Orbs and Level-Up your character');
+    Instructions.style.display = 'flex';
+    // document.querySelector('.game-title').style.visibility = 'hidden';
+});
+
+closeInstructions.addEventListener('click', () => {
+    Instructions.style.display = 'none';
+    // document.querySelector('.game-title').style.visibility = 'show';
+
 });
 
 

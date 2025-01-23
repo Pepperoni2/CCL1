@@ -96,7 +96,7 @@ class Enemy extends BaseGameObject {
             case "Projectile":
                 collidedObject.active = false;
                 this.health -= collidedObject.damage;
-                
+                global.music.playSound("enemyImpact")
                 // Add a new damage number
                 this.damageNumbers.push({
                     value: `${parseFloat(collidedObject.damage).toFixed(0)}`,  // Text to display
@@ -123,7 +123,7 @@ class Enemy extends BaseGameObject {
     if (currentTime - this.lastDamageTime >= 500) {
         // Update the last execution time
         this.lastDamageTime = currentTime;
-
+        global.music.playSound("enemyImpact");
         // Execute your damage number logic
         this.damageNumbers.push({
             value: `${parseFloat(collidedObject.damage).toFixed(0)}`,

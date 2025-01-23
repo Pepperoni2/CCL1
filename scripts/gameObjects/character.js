@@ -90,6 +90,7 @@ class Character extends BaseGameObject {
         this.experience -= this.calculatedExperienceThreshold();
         this.experience < 0 ? this.experience = 0 : null;
         displayUpgradeCards();
+        global.music.playSound("levelUp");
     }
 
     attack = function () {
@@ -103,6 +104,7 @@ class Character extends BaseGameObject {
             this.weapons.forEach(weapon => {
                 switch(weapon.name){
                     case "pistol":
+                        // global.music.playSound("pistol");
                         let offsetY = 0,
                             offsetX = 0;          
                         for (let i = 0; i < weapon.projectileCount; i++) {
@@ -110,6 +112,7 @@ class Character extends BaseGameObject {
                             offsetY += 20;
                             offsetX += 20;
                         }
+                        
                         break;
                     case "ElectricField":
                         if (global.applyFieldUpgrade) {
@@ -145,6 +148,7 @@ class Character extends BaseGameObject {
                     collidingObject.active = false;
                     this.experience += collidingObject.exp * global.playerObject.expModifier;
                     this.experienceForNextLevel = this.calculatedExperienceThreshold();
+                    global.music.playSound("ExpCollect");
                 }
                 break;
             default:

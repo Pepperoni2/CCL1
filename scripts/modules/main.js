@@ -72,6 +72,9 @@ function resetGame() {
 function setupGame() {
     resetGame();
     global.playerObject = new Character(610, 330, 36, 60);
+    global.music.loadSound("ExpCollect","../assets/sounds/EXP_collect.mp3", false);
+    global.music.loadSound("enemyImpact","../assets/sounds/enemy_impact.wav", false);
+    global.music.loadSound("levelUp","../assets/sounds/level_up.wav", false);
     global.spawnRate = 2000; // 2 seconds
     const timer = setInterval(() => {
         if(!global.gameIsPaused){

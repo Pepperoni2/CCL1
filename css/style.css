@@ -2,9 +2,13 @@
     font-family: "MegaMaxJonathanToo";
     src: url(../assets/fonts/MegamaxJonathanToo-YqOq2.ttf);
 }
+@font-face {
+    font-family: "Quadriana";
+    src: url(../assets/fonts/quadriana.ttf);
+}
 
 *{
-   font-family: 'MegaMaxJonathanToo', sans-serif;
+    font-family: 'Quadriana', sans-serif;
 }
 
 body{
@@ -136,6 +140,8 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(205, 145, 67, 0.8);
+    border-radius: 10px;
+    border: 2px solid rgba(213, 123, 4, 0.8)
 }
 #cards{
     display: flex;
@@ -166,6 +172,7 @@ body{
 .cardTitle{
     color: white;
     text-align: center;
+    font-family: 'MegaMaxJonathanToo', sans-serif;
 }
 .cardDescription{
     color: white;
@@ -236,6 +243,8 @@ body{
     height: 100%;
     flex-direction: column;
     text-align: center;
+    background-image: url("../assets/images/title_screen.png");
+    font-family: 'MegaMaxJonathanToo', sans-serif;
   }
   
   .game-title {

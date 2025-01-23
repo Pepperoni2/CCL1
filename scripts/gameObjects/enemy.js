@@ -2,6 +2,7 @@ import { global } from "../modules/global.js";
 import { BaseGameObject } from "./baseGameObject.js";
 import { ExpObject } from "./collectables/expObject.js";
 import { Magnet } from "./collectables/magnetObject.js";
+import { HealthKit } from "./collectables/healthKit.js";
 
 class Enemy extends BaseGameObject {
     constructor(x, y, width, height, health, speed, exp, spritePath) {
@@ -47,13 +48,18 @@ class Enemy extends BaseGameObject {
         if (this.health <= 0 && this.active) {
             this.active = false;
             global.score++;
-            // Drop exp object 92% of the time, magnet 8% of the time
-            if (Math.random() > 0.08) {
+           
+            // Drop exp object 90% of the time, magnet 5% of the time healthKit 5% of the time
+            if (Math.random() > 0.1) {
                 new ExpObject(this.x + this.width / 2, this.y + this.height / 2, 15, 15, this.exp)
             }
-            else if (global.magnetCount < 2) {
+            else if ( Math.random() > 0.5 && global.magnetCount < 2) {
                 new Magnet(this.x + this.width / 2, this.y + this.height / 2, 30, 30)
                 global.magnetCount++;
+            }
+            else if(global.healthKitCount < 2){
+                new HealthKit(this.x + this.width / 2, this.y + this.height / 2, 30, 30, "../assets/sprites/health_kit.png")
+                global.healthKitCount++;
             }
         }
     }

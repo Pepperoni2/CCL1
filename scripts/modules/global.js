@@ -23,6 +23,7 @@ global.music = new SoundManager();
 global.newMusic = false;
 global.lastDamageTime = 0;
 global.magnetCount = 0;
+global.healthKitCount = 0;
 
 global.getCanvasBounds = function () {
     let bounds =  {
@@ -83,8 +84,10 @@ global.getTime = function(){
 }
 
 global.adjustSpawnRate = function(){
-
-    if (global.seconds >= 60 && global.spawnRate > 1500) {
+    if(global.seconds <= 60){
+        global.spawnRate = 2000; // 2 seconds
+    }
+    else if (global.seconds >= 60 && global.spawnRate > 1500) {
         global.spawnRate -= 200; // Faster scaling after 1 minute
     } else if (global.seconds >= 300 && global.spawnRate > 1000) {
         global.spawnRate -= 150; // Further decrease after 5 minutes
@@ -138,6 +141,7 @@ global.spawnEnemy = function(){
     }
     if(global.seconds < 60){
         new Enemy(randomX, randomY, 60, 60, 10, 30, 10, "../assets/sprites/Enemy.png");
+        console.log("Enemy spawned");
     }
     else if(global.seconds >= 60 && global.seconds <= 120){ // 1-2 minutes
         new Enemy(randomX, randomY, 60, 60, 10, 30, 15, "../assets/sprites/Enemy.png");
@@ -182,10 +186,10 @@ global.spawnEnemy = function(){
             global.music.playMusic();
             global.newMusic = false;
         }
-        new Enemy(randomX, randomY, 60, 60, 50, 45, 100, "../assets/sprites/Enemy_4.png");
+        new Enemy(randomX, randomY, 60, 60, 200, 40, 100, "../assets/sprites/Enemy_4.png");
     }
     else{ // 15+ min 
-        new Enemy(randomX, randomY, 60, 60, 100, 70, 200, "../assets/sprites/Enemy_4.png");
+        new Enemy(randomX, randomY, 60, 60, 300, 50, 200, "../assets/sprites/Enemy_4.png");
     }
     
 }

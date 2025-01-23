@@ -66,6 +66,7 @@ function resetGame() {
     global.newMusic = false;
     global.lastDamageTime = 0;
     global.magnetCount = 0;
+    global.healthKitCount = 0;
 }
 
 function setupGame() {

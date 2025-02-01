@@ -97,5 +97,5 @@ Below are the sprites used to create characters and objects in the game:
 -  **Game balancing**: Balancing the game, scaling enemies, and creating upgrades to enhance gameplay were key components of my work
  
 ### Lessons learned:
-- **Solid foundation**: Building a solid foundation is really helpful, especially for later if other more complex will be added to the game.
+- **Solid foundation**: Building a solid foundation is really helpful, especially for later, if other more complex features will be added to the game.
 - **Keep it Simple**: Focusing on one unique mechanic instead of multiple features made the game more polished and compact. 

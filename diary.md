@@ -81,4 +81,8 @@ Tomorrow: add basic sounds and title screen for the final touch
 
 23.01.2025
 added healthkit, added basic soundeffects title screen added, and adjusted late game enemy scaling
+prepared presentation pitch
+
+24.01.2025
+Presentation day
  

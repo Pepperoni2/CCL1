@@ -13,7 +13,7 @@ Defend yourself against endless waves of enemy robots and upgrade your character
 
 ---
 
-### ** Spritesheets**
+### **Spritesheets**
 Below are the sprites used to create characters and objects in the game:
 
 ### Enemies:

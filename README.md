@@ -32,14 +32,20 @@ Below are the sprites used to create characters and objects in the game:
 
 ### Enemies:
 <div style="text-align: center;">
-  <img src="assets/sprites/Enemy_3.png" alt="Enemy Spritesheet" width="120">
-  <p>*Figure 4: Enemy phase 3*</p>
+  <img src="assets/sprites/Enemy_1.png" alt="Enemy 1" width="120">
+  <p>Enemy phase 1</p>
+   <img src="assets/sprites/Enemy_2.png" alt="Enemy 2" width="120">
+  <p>Enemy phase 1</p>
+  <img src="assets/sprites/Enemy_3.png" alt="Enemy 3" width="120">
+  <p>Enemy phase 3</p>
+   <img src="assets/sprites/Enemy_4.png" alt="Enemy 4" width="120">
+  <p>Enemy phase 4</p>
 </div>
 
 ### Electric Field:
 <div style="text-align: center;">
   <img src="assets/sprites/ElectricField-sheet.png" alt="Electric field Spritesheet" width="500">
-  <p>*Figure 4: Electric Field animation*</p>
+  <p>Electric Field animation</p>
 </div>
 
 ## **Reflection**

@@ -12,6 +12,11 @@ Defend yourself against endless waves of enemy robots and upgrade your character
 </div>
 
 ---
+### Main menu
+<div style="text-align: center;">
+  <img src="menu.png" alt="Main Menu UI Screenshot" width="600">
+  <p>*Figure 2: Menu and user interface.*</p>
+</div>
 
 ### **Spritesheets**
 Below are the sprites used to create characters and objects in the game:
@@ -32,7 +37,7 @@ Below are the sprites used to create characters and objects in the game:
 
 ### Enemies:
 <div style="text-align: center;">
-  <img src="assets/sprites/Enemy_1.png" alt="Enemy 1" width="120">
+  <img src="assets/sprites/Enemy.png" alt="Enemy 1" width="120">
   <p>Enemy phase 1</p>
    <img src="assets/sprites/Enemy_2.png" alt="Enemy 2" width="120">
   <p>Enemy phase 1</p>
@@ -40,6 +45,18 @@ Below are the sprites used to create characters and objects in the game:
   <p>Enemy phase 3</p>
    <img src="assets/sprites/Enemy_4.png" alt="Enemy 4" width="120">
   <p>Enemy phase 4</p>
+</div>
+
+### Collectables:
+<div style="text-align: center;">
+  <img src="assets/sprites/Bullet.png" alt="Bullet" width="60">
+  <p>Bullet sprite</p>
+  <img src="assets/sprites/EXP_Orb.png" alt="Experience Orb" width="60">
+  <p>Experience Orb</p>
+  <img src="assets/sprites/health_kit.png" alt="Health kit" width="60">
+  <p>Health kit</p>
+  <img src="assets/sprites/magnet.png" alt="Magnet" width="60">
+  <p>Magnet</p>
 </div>
 
 ### Electric Field:

@@ -16,6 +16,12 @@ Defend yourself against endless waves of enemy robots and upgrade your character
 ### **Spritesheets**
 Below are the sprites used to create characters and objects in the game:
 
+### background:
+<div style="text-align: center;">
+  <img src="assets/images/Background_1.png" alt="Background of a lab">
+  <p>*Lab Background*</p>
+</div>
+
 ### Enemies:
 <div style="text-align: center;">
   <img src="assets/sprites/Enemy_3.png" alt="Enemy Spritesheet" width="120">

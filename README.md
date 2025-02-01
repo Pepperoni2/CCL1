@@ -16,10 +16,16 @@ Defend yourself against endless waves of enemy robots and upgrade your character
 ### **Spritesheets**
 Below are the sprites used to create characters and objects in the game:
 
-### background:
+### Backgrounds:
 <div style="text-align: center;">
   <img src="assets/images/Background_1.png" alt="Background of a lab">
   <p>*Lab Background*</p>
+  <img src="assets/images/Background_2.png" alt="Background of an underground testing chamber">
+  <p>*Underground testing chamber*</p>
+  <img src="assets/images/Background_3.png" alt="Background of a portal collapsing">
+  <p>*Background of a portal collapsing*</p>
+  <img src="assets/images/Background_4.png" alt="Background of calamity">
+  <p>*Calamity background*</p>
 </div>
 
 ### Enemies:

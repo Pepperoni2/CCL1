@@ -2,6 +2,7 @@
 Defend yourself against endless waves of enemy robots and upgrade your character along the way.
 
 ## **Play the Game**
+**Controls**: WASD-keys to move, ESC-key to pause the game
 [Click here to play the game!](https://cc241008-20915.php.fhstp.cc/)
 
 

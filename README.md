@@ -1,4 +1,4 @@
-# Misty Survivor's: Endless Struggle
+# Misty Survivors: Endless Struggle
 Defend yourself against endless waves of enemy robots and upgrade your character along the way.
 
 ## **Play the Game**
@@ -57,6 +57,19 @@ Below are the sprites used to create characters and objects in the game:
 <div style="text-align: center;">
   <img src="assets/sprites/ElectricField-sheet.png" alt="Electric field Spritesheet" width="500">
   <p>Electric Field animation</p>
+</div>
+
+### UI Upgrade Images:
+<div style="text-align: center;">
+  <img src="assets/images/HealthRegeneration.png" alt="Health Regeneration">
+  <img src="assets/images/KillScore.png" alt="Score icon, robot with X as eyes">
+  <img src="assets/images/damage_boost.png" alt="Damage Boost">
+  <img src="assets/images/electricField.png" alt="Electric Field">
+  <img src="assets/images/experience_boost.png" alt="Experience Boost">
+  <img src="assets/images/movement_speed.png" alt="Movement speed">
+  <img src="assets/images/pistol_upgrade_1.png" alt="Pistol Upgrade 1">
+  <img src="assets/images/pistol_upgrade_2.png" alt="Pistol Upgrade 2">  
+  <p>*Upgrade UI images*</p> 
 </div>
 
 ### Backgrounds:

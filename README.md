@@ -1,9 +1,6 @@
-# CCL1
-Misty Survivor's: Endless Struggle is a small 2D Browser Game project for the Creative Code Labs in WS24
+# Misty Survivor's: Endless Struggle
+Defend yourself against endless waves of enemy robots and upgrade your character along the way.
 
+## ** Play the Game**
+[Click here to play the game!](https://cc241008-20915.php.fhstp.cc/)
 
-Notes:
-start with projectiles
-try to implement follow player, else random movement
-
-Divs over canvas for UI

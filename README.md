@@ -22,6 +22,13 @@ Defend yourself against endless waves of enemy robots and upgrade your character
 ### **Spritesheets**
 Below are the sprites used to create characters and objects in the game:
 
+### Player character:
+<div style="text-align: center;">
+  <img src="assets/sprites/character_1.png" alt="Player walking">
+  <img src="assets/sprites/character_2.png" alt="Player walking">
+  <p>*Player character walking animation.*</p>
+</div>
+
 ### Enemies:
 <div style="text-align: center;">
   <img src="assets/sprites/Enemy.png" alt="Enemy 1" width="120">
@@ -34,7 +41,7 @@ Below are the sprites used to create characters and objects in the game:
   <p>Enemy phase 4</p>
 </div>
 
-### Collectables:
+### Bullet and Collectables:
 <div style="text-align: center;">
   <img src="assets/sprites/Bullet.png" alt="Bullet" width="60">
   <p>Bullet sprite</p>

@@ -21,26 +21,12 @@ Defend yourself against endless waves of enemy robots and upgrade your character
 ### **Spritesheets**
 Below are the sprites used to create characters and objects in the game:
 
-### Backgrounds:
-<div style="text-align: center;">
-  <img src="assets/images/Background_1.png" alt="Background of a lab">
-  <p>*Lab Background*</p>
-  <img src="assets/images/Background_2.png" alt="Background of an underground testing chamber">
-  <p>*Underground testing chamber*</p>
-  <img src="assets/images/Background_3.png" alt="Background of a portal">
-  <p>*Background of a portal</p>
-  <img src="assets/images/Background_4.png" alt="Background of a portal collapsing">
-  <p>*Background of a portal collapsing*</p>
-  <img src="assets/images/Chalamity.png" alt="Background of calamity">
-  <p>*Background of calamity*</p>
-</div>
-
 ### Enemies:
 <div style="text-align: center;">
   <img src="assets/sprites/Enemy.png" alt="Enemy 1" width="120">
   <p>Enemy phase 1</p>
    <img src="assets/sprites/Enemy_2.png" alt="Enemy 2" width="120">
-  <p>Enemy phase 1</p>
+  <p>Enemy phase 2</p>
   <img src="assets/sprites/Enemy_3.png" alt="Enemy 3" width="120">
   <p>Enemy phase 3</p>
    <img src="assets/sprites/Enemy_4.png" alt="Enemy 4" width="120">
@@ -63,6 +49,20 @@ Below are the sprites used to create characters and objects in the game:
 <div style="text-align: center;">
   <img src="assets/sprites/ElectricField-sheet.png" alt="Electric field Spritesheet" width="500">
   <p>Electric Field animation</p>
+</div>
+
+### Backgrounds:
+<div style="text-align: center;">
+  <img src="assets/images/Background_1.png" alt="Background of a lab">
+  <p>*Lab Background*</p>
+  <img src="assets/images/Background_2.png" alt="Background of an underground testing chamber">
+  <p>*Underground testing chamber*</p>
+  <img src="assets/images/Background_3.png" alt="Background of a portal">
+  <p>*Background of a portal</p>
+  <img src="assets/images/Background_4.png" alt="Background of a portal collapsing">
+  <p>*Background of a portal collapsing*</p>
+  <img src="assets/images/Chalamity.png" alt="Background of calamity">
+  <p>*Background of calamity*</p>
 </div>
 
 ## **Reflection**

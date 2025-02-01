@@ -22,10 +22,12 @@ Below are the sprites used to create characters and objects in the game:
   <p>*Lab Background*</p>
   <img src="assets/images/Background_2.png" alt="Background of an underground testing chamber">
   <p>*Underground testing chamber*</p>
-  <img src="assets/images/Background_3.png" alt="Background of a portal collapsing">
+  <img src="assets/images/Background_3.png" alt="Background of a portal">
+  <p>*Background of a portal</p>
+  <img src="assets/images/Background_4.png" alt="Background of a portal collapsing">
   <p>*Background of a portal collapsing*</p>
-  <img src="assets/images/Background_4.png" alt="Background of calamity">
-  <p>*Calamity background*</p>
+  <img src="assets/images/Chalamity.png" alt="Background of calamity">
+  <p>*Background of calamity*</p>
 </div>
 
 ### Enemies:

@@ -64,6 +64,9 @@ dynamic enemy scaling, upgrademenu styling, remade timer;
 adjusted enemy scaling and spawn rate
 added new sprites and loading sprites into game
 
+20.01.2025
+added various images for the upgrade menu, added score icon
+starting to draw different stage backgrounds
 
 21.01.2025
 added circular hit detection to the electric field
